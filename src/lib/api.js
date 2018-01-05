@@ -1,0 +1,34 @@
+import config from '../config';
+
+function getMovies() {
+	return new Promise((resolve, reject) => {
+		fetch(config.api.programsUrl)
+			.then(resp => resp.json())
+			.then(json => resolve(_filterChannels(json.data)))
+			.catch(error => reject(error));
+	});
+}
+
+function _filterChannels(channels) {
+	const channelData = channels.filter(channel => config.channels.indexOf(parseInt(channel.ch_id, 10)) !== -1);
+	return _filterMovies(channelData);
+}
+
+function _filterMovies(channelData) {
+	return channelData.map(channel => channel.prog.filter(prog => {
+		prog.ch_id = channel.ch_id;
+		return parseInt(prog.g_id, 10) === config.genre_id;
+	}))
+		.filter(item => item.length);
+}
+
+function getProgramInfo(db_id) {
+	return new Promise((resolve, reject) => {
+		fetch(config.api.programUrl.replace(/%s/g, db_id))
+			.then(resp => resp.json())
+			.then(json => resolve({ db_id, descr: json.data.descr }) )
+			.catch(error => reject(error));
+	});
+}
+
+export { getMovies, getProgramInfo };
