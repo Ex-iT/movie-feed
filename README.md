@@ -10,4 +10,6 @@ This project requires [Node.js](http://nodejs.org/) (>= v8) and [npm](https://np
 
 After installing dependencies using `npm install` start local development by running:
 
+```
 $ npm run start
+```
