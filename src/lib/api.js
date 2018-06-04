@@ -1,8 +1,8 @@
 import config from '../config';
 
-function getMovies() {
+function getMovies(day = 0) {
 	return new Promise((resolve, reject) => {
-		fetch(config.api.programsUrl)
+		fetch(config.api.programsUrl.replace(/%s/g, day))
 			.then(resp => resp.json())
 			.then(json => resolve(_filterChannels(json.data)))
 			.catch(error => reject(error));
@@ -26,7 +26,7 @@ function getProgramInfo(db_id) {
 	return new Promise((resolve, reject) => {
 		fetch(config.api.programUrl.replace(/%s/g, db_id))
 			.then(resp => resp.json())
-			.then(json => resolve({ db_id, descr: json.data.descr }) )
+			.then(json => resolve({ db_id, descr: json.data.descr, img: json.data.img  }) )
 			.catch(error => reject(error));
 	});
 }

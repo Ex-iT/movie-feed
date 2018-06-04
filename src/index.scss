@@ -23,15 +23,19 @@ main {
 	line-height: 1.375em;
 	padding: 1em;
 	min-height: 100vh;
+
+	@media screen and (min-width: 720px) {
+		display: flex;
+	}
 }
 
-h1 {
+h1, h2 {
 	font-size: 1.5em;
 	font-weight: bold;
 	margin: 0 0 20px 0;
 }
 
-h2 {
+h3 {
 	font-size: 1.2em;
 	font-weight: bold;
 	margin: 0 0 5px 0;
@@ -47,16 +51,33 @@ ol {
 	list-style-type: none;
 }
 
+.today {
+	margin-bottom: 30px;
+
+	@media screen and (min-width: 720px) {
+		margin-right: 10px;
+	}
+}
+
+.today,
+.tomorrow {
+	@media screen and (min-width: 720px) {
+		flex: 1 1 50%;
+	}
+}
+
 .movie-item {
 	display: flex;
 	margin-bottom: 10px;
 	background-color: rgba(255, 255, 255, .2);
 	padding: 10px;
 	border-radius: 2px;
+	min-height: 71px;
 }
 
 .movie-info {
 	cursor: pointer;
+	width: 100%;
 }
 
 .logo {
@@ -79,6 +100,11 @@ ol {
 		margin-top: 10px;
 		transition: height 0.3s ease-out, margin 0.3s ease-out;
 	}
+
+	@media screen and (min-width: 720px) {
+		display: flex;
+		flex-direction: row-reverse;
+	}
 }
 
 .synopsis {
@@ -89,4 +115,27 @@ ol {
 	strong {
 		font-weight: bold;
 	}
+
+	@media screen and (min-width: 720px) {
+		flex: 1 1 66%;
+	}
+}
+
+.asset-image {
+	margin: 0 0 10px 0;
+
+	img {
+		border: 1px solid rgba(255, 255, 255, .2);
+		max-width: 100%;
+	}
+
+	@media screen and (min-width: 720px) {
+		flex: 1 1 33%;
+		margin: 0 0 0 20px;
+		text-align: right;
+	}
+}
+
+@media (min-width: 720px) {
+
 }
