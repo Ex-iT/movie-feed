@@ -20,17 +20,20 @@ class App extends Component {
 		return new Promise((resolve, reject) => {
 			const itemData = [];
 			getMovies(day).then(data => {
-				data.forEach(itemArr => {
-					const item = itemArr[0];
-					getProgramInfo(item.db_id).then(info => {
-						item.descr = info.descr;
-						item.img = info.img;
-						itemData.push(item);
-						itemData.sort((a, b) => a.s - b.s);
+				data.forEach(items => {
+					items.forEach(item => {
+						getProgramInfo(item.db_id).then(info => {
+							item.descr = info.descr;
+							item.img = info.img;
+							itemData.push(item);
 
-						resolve(itemData);
-					})
-					.catch(err => reject(err));
+							// Sort by channel Id first then sort on start time
+							itemData.sort((a, b) => (a.ch_id - b.ch_id) || (a.ch_id - b.ch_id) || (a.s - b.s) || (a.s - b.s));
+
+							resolve(itemData);
+						})
+						.catch(err => reject(err));
+					});
 				});
 			})
 			.catch(err => reject(err));
