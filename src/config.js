@@ -5,6 +5,6 @@ export default {
 		programUrl: 'https://json.tvgids.nl/v3/program/%s/',
 		assetsUrl: 'https://tvgidsassets.nl/upload/'
 	},
-	channels: [1, 2, 3, 4, 31, 46, 92, 36, 460, 37, 34, 91, 7, 8, 440],
+	channels: [1, 2, 3, 4, 31, 34, 36, 37, 46, 91, 92, 440, 460],
 	genre_id: 6
 };
