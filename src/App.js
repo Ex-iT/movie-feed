@@ -12,33 +12,33 @@ class App extends Component {
 			dataTomorrow: [{}, {}, {}]
 		}
 
-		this.getData().then(dataToday => this.setState({ dataToday }));
-		this.getData(1).then(dataTomorrow => this.setState({ dataTomorrow }));
+		Promise.all([this.getData(), this.getData(1)]).then(([dataToday, dataTomorrow]) => {this.setState({ dataToday, dataTomorrow })});
 	}
 
 	getData(day = 0) {
 		return new Promise((resolve, reject) => {
-			const itemData = [];
 			getMovies(day).then(data => {
+				const itemsData = [];
 				data.forEach(items => {
 					items.forEach(item => {
-						getProgramInfo(item.db_id).then(info => {
-							item.descr = info.descr;
-							item.img = info.img;
-							itemData.push(item);
-
-							// Sort by channel Id first then sort on start time
-							itemData.sort((a, b) => (a.ch_id - b.ch_id) || (a.ch_id - b.ch_id) || (a.s - b.s) || (a.s - b.s));
-
-							resolve(itemData);
-						})
-						.catch(err => reject(err));
+						itemsData.push(item);
+						itemsData.sort((a, b) => (a.ch_id - b.ch_id) || (a.s - b.s));
 					});
 				});
+				
+				return itemsData;
+			})
+			.then(itemsData => {
+				itemsData.forEach(item => {
+					getProgramInfo(item.db_id).then(info => {
+						item.descr = info.descr;
+						item.img = info.img;
+					});
+				});
+				resolve(itemsData);
 			})
 			.catch(err => reject(err));
 		});
-		
 	}
 
 	render() {

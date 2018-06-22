@@ -16,13 +16,6 @@ class Lister extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ itemData: nextProps.data });
-		
-		// @TODO: figure out why it doesn't render properly
-		// without this delayed force update
-		setTimeout(() => {
-			this.forceUpdate();
-		}, 100);
-		
 	}
 
 	collapsable(id) {
