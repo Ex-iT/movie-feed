@@ -1,5 +1,4 @@
 @import './styles/reset.scss';
-@import './styles/variables.scss';
 
 *, *:before, *:after {
 	box-sizing: border-box;
@@ -8,6 +7,7 @@
 html, body {
 	-webkit-text-size-adjust: 100%;
 	font-size: 16px;
+	line-height: 1;
 	background-color: #000000;
 	margin: 0;
 	padding: 0;
