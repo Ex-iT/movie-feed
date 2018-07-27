@@ -8,7 +8,7 @@ class Lister extends Component {
 
 		this.state = {
 			itemData: props.data || [{}],
-			toggleStatus : {}
+			toggleStatus: {}
 		};
 
 		this.collapsable = this.collapsable.bind(this);

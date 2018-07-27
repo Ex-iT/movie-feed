@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Lister from './components/Lister/Lister';
+import ErrorBlock from './components/ErrorBlock/ErrorBlock';
 
 import { getMovies, getProgramInfo } from './lib/api';
 
@@ -8,11 +9,32 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			dataToday: [{}, {}, {}],
-			dataTomorrow: [{}, {}, {}]
+			data: {
+				0: [{}, {}, {}],
+				1: [{}, {}, {}]
+			},
+			error: {
+				0: false,
+				1: false
+			},
+			errorDescription: {
+				0: 'Onbekende fout',
+				1: 'Onbekende fout'
+			}
 		}
+	}
 
-		Promise.all([this.getData(), this.getData(1)]).then(([dataToday, dataTomorrow]) => {this.setState({ dataToday, dataTomorrow })});
+	componentDidMount() {
+		this.fetchDays([0, 1]);
+		window.addEventListener('reloadData', event => this.fetchDays([event.detail.day]));
+	}
+
+	fetchDays(days) {
+		days.forEach(day => {
+			this.getData(day)
+				.then(dayData => this.setState({ data: Object.assign({}, this.state.data, { [day]: dayData }), error: Object.assign({}, this.state.error, { [day]: false }) }))
+				.catch(({ message }) => this.setState({ error: Object.assign({}, this.state.error, { [day]: true }), errorDescription: Object.assign({}, this.state.errorDescription, { [day]: message }) }));
+		});
 	}
 
 	getData(day = 0) {
@@ -37,7 +59,7 @@ class App extends Component {
 				});
 				resolve(itemsData);
 			})
-			.catch(err => reject(err));
+			.catch(error => reject(error));
 		});
 	}
 
@@ -46,11 +68,19 @@ class App extends Component {
 			<main>
 				<section className="today">
 					<h1>Films vandaag op televisie</h1>
-					<Lister data={ this.state.dataToday } />
+					{ this.state.error[0] ? (
+						<ErrorBlock description={ this.state.errorDescription[0] } day={0} />
+					) : (
+						<Lister data={ this.state.data[0] } />
+					)}
 				</section>
 				<section className="tomorrow">
 					<h2>Films morgen op televisie</h2>
-					<Lister data={ this.state.dataTomorrow } />
+					{ this.state.error[1] ? (
+						<ErrorBlock description={ this.state.errorDescription[1] } day={1} />
+					) : (
+						<Lister data={ this.state.data[1] } />
+					)}
 				</section>
 			</main>
 		);

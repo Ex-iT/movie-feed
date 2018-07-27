@@ -17,8 +17,9 @@ html, body {
 main {
 	background-image: url('./assets/bg.jpg');
 	background-size: cover;
+	background-attachment: fixed;
 	color: #FFFFFF;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 1em;
 	line-height: 1.375em;
 	padding: 1em;
@@ -45,10 +46,22 @@ p {
 	margin: 0;
 }
 
+i {
+	font-style: italic;
+}
+
 ol {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
+}
+
+.a11y-only {
+	position: absolute !important;
+	height: 1px;
+	width: 1px; 
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
 }
 
 .today {
@@ -66,13 +79,15 @@ ol {
 	}
 }
 
-.movie-item {
+.movie-item,
+.error-block {
 	display: flex;
 	margin-bottom: 10px;
 	background-color: rgba(255, 255, 255, .2);
 	padding: 10px;
 	border-radius: 2px;
 	min-height: 71px;
+	width: 100%;
 }
 
 .movie-info {
@@ -136,6 +151,69 @@ ol {
 	}
 }
 
-@media (min-width: 720px) {
+.error-block {
+	color: #FFFFFF;
+	border: 3px solid rgba(255, 0, 0, .6);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	line-height: 1.375em;
+	align-items: center;
+	transition: opacity .3s ease-out;
 
+	.description {
+		padding-right: 20px;
+		flex: 0 1 auto;
+	}
+
+	.icon-reload {
+		flex: 0 0 auto;
+		margin-left: auto;
+	}
+
+	&:not([disabled]) {
+		cursor: pointer;
+	}
+}
+
+.icon-reload {
+	display: block;
+	height: 2em;
+	padding: .25em;
+	width: 2em;
+	transform: rotate(45deg);
+	
+	&:before, &:after {
+		content: '';
+		display: block;
+	}
+
+	&:before {
+		border-color: transparent rgba(255, 255, 255, .7) rgba(255, 255, 255, .7) rgba(255, 255, 255, .7);
+		border-radius: 50%;
+		border-style: solid;
+		border-width: .2em;
+		height: 1.5em;
+		width: 1.5em;
+		transform: rotate(45deg);
+	}
+
+	&:after {
+		border-color: transparent transparent transparent rgba(255, 255, 255, .7);
+		border-style: solid;
+		border-width: .3125em 0 .3125em .5em;
+		height: 0;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 0;
+	}
+
+	&.spin {
+		animation: rotate 1.5s linear infinite;
+		transform: rotate(0);
+	}
+}
+
+@keyframes rotate {
+	100% { transform: rotate(360deg); }
 }
