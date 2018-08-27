@@ -14,8 +14,10 @@ class Lister extends Component {
 		this.collapsable = this.collapsable.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.setState({ itemData: nextProps.data });
+	componentDidUpdate(prevProps) {
+		if (this.props.data !== prevProps.data) {
+			this.setState({ itemData: this.props.data });
+		}
 	}
 
 	collapsable(id) {

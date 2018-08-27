@@ -13,10 +13,6 @@ class ErrorBlock extends Component {
 		this.reload = this.reload.bind(this);
 	}
 
-	componentWillReceiveProps() {
-		this.setState({ isLoading: false });
-	}
-
 	reload() {
 		this.setState({ isLoading: true });
 
