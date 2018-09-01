@@ -19,7 +19,8 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
+    "build-post": "del .\\build\\service-worker.js",
+    "build": "npm-run-all build-css build-js build-post",
     "eject": "react-scripts eject"
   }
 }
