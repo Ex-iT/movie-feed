@@ -13,13 +13,16 @@
     "react-dom": "^16.4.0",
     "react-scripts": "^3.0.0"
   },
+  "devDependencies": {
+    "del-cli": "^1.1.0"
+  },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build-post": "del .\\build\\service-worker.js",
+    "build-post": "del-cli \"./build/service-worker.js\"",
     "build": "npm-run-all build-css build-js build-post",
     "eject": "react-scripts eject"
   },
