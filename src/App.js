@@ -71,7 +71,7 @@ class App extends Component {
 					{ this.state.error[0] ? (
 						<ErrorBlock description={ this.state.errorDescription[0] } day={0} />
 					) : (
-						<Lister data={ this.state.data[0] } />
+						<Lister data={ this.state.data[0] } day="Vandaag" />
 					)}
 				</section>
 				<section className="tomorrow">
@@ -79,7 +79,7 @@ class App extends Component {
 					{ this.state.error[1] ? (
 						<ErrorBlock description={ this.state.errorDescription[1] } day={1} />
 					) : (
-						<Lister data={ this.state.data[1] } />
+						<Lister data={ this.state.data[1] } day="Morgen" />
 					)}
 				</section>
 			</main>

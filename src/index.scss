@@ -99,9 +99,14 @@ ol {
 	width: 100%;
 }
 
-.movie-info {
+.movie-item {
 	cursor: pointer;
+}
+
+.movie-info {
+	position: relative;
 	width: 100%;
+	padding-right: 30px;
 }
 
 .logo {
@@ -158,6 +163,18 @@ ol {
 		margin: 0 0 0 20px;
 		text-align: right;
 	}
+}
+
+.button-share {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	background: transparent;
+	fill: #FFFFFF;
+	padding: 0;
+	width: 25px;
+	height: auto;
 }
 
 .error-block {
