@@ -14,7 +14,7 @@
     "react-scripts": "^3.0.1"
   },
   "devDependencies": {
-    "del-cli": "^1.1.0"
+    "del-cli": "^2.0.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
