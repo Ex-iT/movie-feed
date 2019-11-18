@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import formatTime from '../../lib/formatTime' ;
+import formatRating from '../../lib/formatRating' ;
 import config from '../../config';
 
 class Lister extends Component {
@@ -53,17 +54,30 @@ class Lister extends Component {
 					<div className="logo"><img src={ movie.ch_id ? config.api.channelLogoSrc.replace(/%s/g, movie.ch_id) : '' } alt={  movie.ch_id ? this.getChannelName(movie.ch_id) : '' } /></div>
 					<div className="movie-info">
 						<div className="details">
-							<h3>{ movie.t }</h3>
+							<h3>{ movie.title }</h3>
 							{ movie.s ? `${formatTime(movie.s)} - ${formatTime(movie.e)}` : '' }
 						</div>
-						<div className={`assets-details ${this.state.toggleStatus[movie.db_id] ? 'open' : '' }`}>
+						<div className={`asset-details ${this.state.toggleStatus[movie.db_id] ? 'open' : '' }`}>
 							{ movie.img &&
-								<div className="asset-image"><img src={ `${config.api.assetsUrl}${movie.img}` } alt={ movie.t } /></div>
+								<div className="asset-image"><img src={ movie.img } alt={ movie.title } /></div>
 							}
-							<div className="synopsis" dangerouslySetInnerHTML={{__html: movie.descr }}></div>
+							<div className="synopsis">
+								<div dangerouslySetInnerHTML={{__html: movie.descr }}></div>
+								<div className="meta-info">
+									<p className="rating" itemType="http://schema.org/AggregateRating" itemScope="" itemProp="aggregateRating">
+										<strong>Waardering:</strong> <span itemProp="ratingValue">{ formatRating(movie.rating) }</span>
+										<span className="a11y-only"> / <span itemProp="bestRating">10</span></span>
+									</p>
+									<p><strong>Regiseur:</strong> { movie.dir }</p>
+									<p><strong>Acteurs:</strong> { movie.act }</p>
+									<p><strong>Jaar:</strong> { movie.year }</p>
+									<p><strong>Genre:</strong> { movie.prog_sort }</p>
+									<p><strong>Land:</strong> { movie.country }</p>
+								</div>
+							</div>
 						</div>
-						{ this.canShare && movie.t &&
-							<button className="button-share" type="button" onClick={ this.shareItem.bind(this, movie.db_id, movie.ch_id, movie.t, movie.s, movie.e) }>
+						{ this.canShare && movie.title &&
+							<button className="button-share" type="button" onClick={ this.shareItem.bind(this, movie.db_id, movie.ch_id, movie.title, movie.s, movie.e) }>
 								<svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg"><path d="M72 56c-4.813 0-9.12 2.137-12.054 5.501L39.643 51.35c.23-1.081.357-2.201.357-3.35s-.127-2.269-.357-3.349l20.303-10.152C62.879 37.864 67.187 40 72 40c8.836 0 16-7.164 16-16S80.836 8 72 8s-16 7.164-16 16c0 1.149.127 2.269.357 3.349L36.054 37.501C33.121 34.136 28.814 32 24 32c-8.836 0-16 7.164-16 16s7.164 16 16 16c4.814 0 9.12-2.137 12.054-5.501l20.304 10.152C56.127 69.731 56 70.851 56 72c0 8.836 7.164 16 16 16s16-7.164 16-16-7.164-16-16-16zm0-40a8 8 0 1 1 0 16 8 8 0 0 1 0-16zM24 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm48 24a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></svg>
 								<span className="a11y-only">Delen</span>
 							</button>

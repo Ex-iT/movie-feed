@@ -26,7 +26,7 @@ function getProgramInfo(db_id) {
 	return new Promise((resolve, reject) => {
 		fetch(config.api.programUrl.replace(/%s/g, db_id))
 			.then(resp => resp.json())
-			.then(json => resolve({ db_id, descr: json.data.descr, img: json.data.img  }) )
+			.then(json => resolve({ db_id, data: json.data }))
 			.catch(error => reject(error));
 	});
 }

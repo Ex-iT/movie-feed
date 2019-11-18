@@ -47,14 +47,19 @@ class App extends Component {
 						itemsData.sort((a, b) => (a.ch_id - b.ch_id) || (a.s - b.s));
 					});
 				});
-				
+
 				return itemsData;
 			})
 			.then(itemsData => {
 				itemsData.forEach(item => {
-					getProgramInfo(item.db_id).then(info => {
-						item.descr = info.descr;
-						item.img = info.img;
+					getProgramInfo(item.db_id).then(({data}) => {
+						item.img = data.img;
+						item.rating = data.rating;
+						item.year = data.year;
+						item.prog_sort = data.prog_sort;
+						item.dir = data.dir;
+						item.act = data.act;
+						item.country = data.country;
 					});
 				});
 				resolve(itemsData);

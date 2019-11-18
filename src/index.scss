@@ -68,7 +68,7 @@ ol {
 .a11y-only {
 	position: absolute !important;
 	height: 1px;
-	width: 1px; 
+	width: 1px;
 	overflow: hidden;
 	clip: rect(1px, 1px, 1px, 1px);
 }
@@ -113,12 +113,12 @@ ol {
 	margin-right: 10px;
 
 	img {
-		width: 45px;
-		height: auto;
+		width: 40px;
+		height: 40px;
 	}
 }
 
-.assets-details {
+.asset-details {
 	overflow: hidden;
 	height: 0;
 	margin-top: 0;
@@ -147,6 +147,10 @@ ol {
 
 	@media screen and (min-width: 720px) {
 		flex: 1 1 66%;
+	}
+
+	.meta-info {
+		margin-top: 5px;
 	}
 }
 
@@ -207,7 +211,7 @@ ol {
 	padding: .25em;
 	width: 2em;
 	transform: rotate(45deg);
-	
+
 	&:before, &:after {
 		content: '';
 		display: block;
