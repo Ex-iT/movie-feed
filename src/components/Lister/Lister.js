@@ -50,29 +50,32 @@ class Lister extends Component {
 	render() {
 		const listItems = this.state.itemData.map((movie, index) => {
 			return (
-				<li key={ index } className="movie-item" onClick={ this.collapsable.bind(this, movie.db_id) }>
+				<li key={ index } itemScope itemType="http://schema.org/Movie" className="movie-item" onClick={ this.collapsable.bind(this, movie.db_id) }>
 					<div className="logo"><img src={ movie.ch_id ? config.api.channelLogoSrc.replace(/%s/g, movie.ch_id) : '' } alt={  movie.ch_id ? this.getChannelName(movie.ch_id) : '' } /></div>
 					<div className="movie-info">
 						<div className="details">
-							<h3>{ movie.title }</h3>
+							<h3 itemProp="name">{ movie.title }</h3>
 							{ movie.s ? `${formatTime(movie.s)} - ${formatTime(movie.e)}` : '' }
 						</div>
 						<div className={`asset-details ${this.state.toggleStatus[movie.db_id] ? 'open' : '' }`}>
-							{ movie.img &&
-								<div className="asset-image"><img src={ movie.img } alt={ movie.title } /></div>
-							}
+							{ movie.img && <div className="asset-image"><img itemProp="image" src={ movie.img } alt={ movie.title } /></div> }
 							<div className="synopsis">
-								<div dangerouslySetInnerHTML={{__html: movie.descr }}></div>
+								{ movie.prog_sort && <strong className="prefix-description">{ movie.prog_sort }</strong> }
+								{ movie.descr && <span dangerouslySetInnerHTML={{__html: movie.descr }}></span> }
 								<div className="meta-info">
-									<p className="rating" itemType="http://schema.org/AggregateRating" itemScope="" itemProp="aggregateRating">
-										<strong>Waardering:</strong> <span itemProp="ratingValue">{ formatRating(movie.rating) }</span>
-										<span className="a11y-only"> / <span itemProp="bestRating">10</span></span>
-									</p>
-									<p><strong>Regiseur:</strong> { movie.dir }</p>
-									<p><strong>Acteurs:</strong> { movie.act }</p>
-									<p><strong>Jaar:</strong> { movie.year }</p>
-									<p><strong>Genre:</strong> { movie.prog_sort }</p>
-									<p><strong>Land:</strong> { movie.country }</p>
+									{ movie.rating &&
+										<p className="rating" itemType="http://schema.org/AggregateRating" itemScope itemProp="aggregateRating">
+											<strong>Waardering:</strong> <span itemProp="ratingValue">{ formatRating(movie.rating) }</span>
+											<span className="a11y-only"> / <span itemProp="bestRating">10</span></span>
+											<span hidden itemProp="reviewCount">1</span>
+										</p>
+									}
+									{ movie.year && <p><strong>Jaar:</strong> <span itemProp="dateCreated">{ movie.year }</span></p> }
+									{ movie.dir && <p><strong>Regiseur:</strong> <span itemProp="director">{ movie.dir }</span></p> }
+									{ movie.act && <p><strong>Acteurs:</strong> { movie.act }</p> }
+									{ movie.scen && <p><strong>Scenario:</strong> { movie.scen }</p> }
+									{ movie.comp && <p><strong>Componist:</strong> { movie.comp }</p> }
+									{ movie.country && <p><strong>Land:</strong> { movie.country }</p> }
 								</div>
 							</div>
 						</div>

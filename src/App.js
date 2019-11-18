@@ -60,6 +60,8 @@ class App extends Component {
 						item.dir = data.dir;
 						item.act = data.act;
 						item.country = data.country;
+						item.scen = data.scen;
+						item.comp = data.comp;
 					});
 				});
 				resolve(itemsData);

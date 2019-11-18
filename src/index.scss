@@ -28,6 +28,10 @@ main {
 	}
 }
 
+[hidden] {
+	display: none !important;
+}
+
 .background-fixed {
 	position: fixed;
 	top: 0;
@@ -137,6 +141,11 @@ ol {
 }
 
 .synopsis {
+	.prefix-description {
+		float: left;
+		margin-right: 5px;
+	}
+
 	p {
 		margin-bottom: 5px;
 	}
