@@ -61,7 +61,7 @@ class Lister extends Component {
 							{ movie.img && <div className="asset-image"><img itemProp="image" src={ movie.img } alt={ movie.title } /></div> }
 							<div className="synopsis">
 								{ movie.prog_sort && <strong className="prefix-description">{ movie.prog_sort }</strong> }
-								{ movie.descr && <span dangerouslySetInnerHTML={{__html: movie.descr }}></span> }
+								{ movie.descr ? <span dangerouslySetInnerHTML={{__html: movie.descr }}></span> : <br /> }
 								<div className="meta-info">
 									{ movie.rating &&
 										<p className="rating" itemType="http://schema.org/AggregateRating" itemScope itemProp="aggregateRating">
