@@ -5,7 +5,7 @@ export default {
 		programUrl: 'https://json.tvgids.nl/v4/program/%s/',
 		assetsUrl: 'https://tvgidsassets.nl/upload/'
 	},
-	deepLink: 'https://www.tvgids.nl/tv//',
+	deepLink: 'https://www.tvgids.nl/tv',
 	channels: [1, 2, 3, 4, 31, 34, 36, 37, 46, 91, 92, 440, 460, 467],
 	channelInfo: {
 		1: { label: 'NPO 1' },

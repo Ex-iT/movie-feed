@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import formatTime from '../../lib/formatTime' ;
-import formatRating from '../../lib/formatRating' ;
+import slugify from 'slugify';
 import config from '../../config';
+import formatTime from '../../lib/formatTime' ;
+import emptyPng from '../../assets/empty.png';
 
 class Lister extends Component {
 	constructor(props) {
@@ -35,10 +36,12 @@ class Lister extends Component {
 			const channelName = this.getChannelName(channelId);
 			const formattedStartTime = formatTime(startTime);
 			const formattedEndTime = formatTime(endTime);
+			const titleSlug = slugify(title, { lower: true, strict: true, locale: 'nl' });
+
 			navigator.share({
 				title: `${title} ${this.state.dayLabel.toLowerCase()} op ${channelName} om ${formattedStartTime}`,
 				text: `${title}\n${this.state.dayLabel} ${channelName}, ${formattedStartTime} - ${formattedEndTime}`,
-				url: config.deepLink + id
+				url: `${config.deepLink}/${titleSlug}/${id}`
 			});
 		}
 	}
@@ -47,26 +50,25 @@ class Lister extends Component {
 		return config.channelInfo[channelId].label;
 	}
 
-	render() {
-		const listItems = this.state.itemData.map((movie, index) => {
-			return (
+	listItems(itemData) {
+		return itemData.map((movie, index) => (
 				<li key={ index } itemScope itemType="http://schema.org/Movie" className="movie-item" onClick={ this.collapsable.bind(this, movie.db_id) }>
-					<div className="logo"><img src={ movie.ch_id ? config.api.channelLogoSrc.replace(/%s/g, movie.ch_id) : '' } alt={  movie.ch_id ? this.getChannelName(movie.ch_id) : '' } /></div>
+					<div className="logo"><img src={ movie.ch_id ? config.api.channelLogoSrc.replace(/%s/g, movie.ch_id) : emptyPng } alt={  movie.ch_id ? this.getChannelName(movie.ch_id) : '' } /></div>
 					<div className="movie-info">
 						<div className="details">
 							<h3 itemProp="name">{ movie.title }</h3>
 							{ movie.s ? `${formatTime(movie.s)} - ${formatTime(movie.e)}` : '' }
 						</div>
 						<div className={`asset-details ${this.state.toggleStatus[movie.db_id] ? 'open' : '' }`}>
-							{ movie.img && <div className="asset-image"><img itemProp="image" src={ movie.img } alt={ movie.title } /></div> }
+							{ movie.img && <div className="asset-image"><img itemProp="image" loading="lazy" src={ movie.img } alt={ movie.title } /></div> }
 							<div className="synopsis">
 								{ movie.prog_sort && <strong className="prefix-description">{ movie.prog_sort }</strong> }
 								{ movie.descr ? <span dangerouslySetInnerHTML={{__html: movie.descr }}></span> : <br /> }
 								<div className="meta-info">
 									{ movie.rating &&
 										<p className="rating" itemType="http://schema.org/AggregateRating" itemScope itemProp="aggregateRating">
-											<strong>Waardering:</strong> <span itemProp="ratingValue">{ formatRating(movie.rating) }</span>
-											<span className="a11y-only"> / <span itemProp="bestRating">10</span></span>
+											<strong>Waardering:</strong> <span itemProp="ratingValue">{ movie.rating } / 5.0</span>
+											<span className="a11y-only"> / <span itemProp="bestRating">5</span></span>
 											<span hidden itemProp="reviewCount">1</span>
 										</p>
 									}
@@ -87,11 +89,14 @@ class Lister extends Component {
 						}
 					</div>
 				</li>
-			);
-		});
+			)
+		);
+	}
+
+	render() {
 		return (
 			<ol>
-				{ listItems }
+				{ this.listItems(this.state.itemData) }
 			</ol>
 		);
 	}
