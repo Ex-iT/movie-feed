@@ -4,7 +4,7 @@ const read = require('fs-readdir-recursive');
 const zlib = require('zlib');
 
 const basePath = './build';
-const match = /\.(js|css|png|jpg)$/;
+const match = /\.(js|css)$/;
 const files = read(basePath).filter(file => file.match(match));
 
 if (files.length) {
