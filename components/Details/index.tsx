@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProgDetails } from '../../types/sharedTypes';
-import DangeouslySetHtmlContent from '../DangeouslySetHtmlContent';
+import DangerouslySetHtmlContent from '../DangeouslySetHtmlContent';
 import MetaInfo from '../MetaInfo';
 
 interface DetailsProps {
@@ -22,7 +22,7 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
         {prog_sort && (
           <strong className="prefix-description">{prog_sort}</strong>
         )}
-        {descr_short ? <DangeouslySetHtmlContent html={descr_short} /> : <br />}
+        {descr_short ? <DangerouslySetHtmlContent html={descr_short} /> : <br />}
         <MetaInfo programDetails={programDetails} />
       </div>
     </div>

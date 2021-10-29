@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const DangeouslySetHtmlContent = (props: {
+const DangerouslySetHtmlContent = (props: {
   html: string;
   [key: string]: any;
 }) => {
@@ -25,4 +25,4 @@ const DangeouslySetHtmlContent = (props: {
   return <div {...rest} ref={divRef} />;
 };
 
-export default DangeouslySetHtmlContent;
+export default DangerouslySetHtmlContent;
