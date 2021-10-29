@@ -67,6 +67,7 @@ export interface ProgDetails {
   end: string;
   day: string;
   descr_short: string;
+  is_passed: boolean;
 }
 
 export interface Error {

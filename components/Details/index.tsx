@@ -1,6 +1,7 @@
 import React from 'react';
+import Image from 'next/image';
 import { ProgDetails } from '../../types/sharedTypes';
-import DangeouslySetHtmlContent from '../DangeouslySetHtmlContent';
+import DangerouslySetHtmlContent from '../DangerouslySetHtmlContent';
 import MetaInfo from '../MetaInfo';
 
 interface DetailsProps {
@@ -14,15 +15,26 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
     <div className={`asset-details${isOpen ? ' open' : ''}`}>
       {img && (
         <div className="asset-image">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img} alt={title} loading="lazy" />
+          <span>
+            <Image
+              src={img}
+              alt={title}
+              width={615}
+              height={400}
+              quality={100}
+            />
+          </span>
         </div>
       )}
       <div className="synopsis">
         {prog_sort && (
           <strong className="prefix-description">{prog_sort}</strong>
         )}
-        {descr_short ? <DangeouslySetHtmlContent html={descr_short} /> : <br />}
+        {descr_short ? (
+          <DangerouslySetHtmlContent html={descr_short} />
+        ) : (
+          <br />
+        )}
         <MetaInfo programDetails={programDetails} />
       </div>
     </div>

@@ -1,48 +1,61 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { ProgDetails } from '../../types/sharedTypes';
 import Details from '../Details';
 import Sharer from '../Sharer';
 
-interface CardPorps {
-  title: string;
+interface CardProps {
   programData: Array<Array<ProgDetails>>;
 }
 
-const Card = ({ title, programData }: CardPorps) => {
+const Card = ({ programData }: CardProps) => {
   const [isOpen, setIsOpen] = useState<{ [key: string]: boolean }>({});
 
   const onClick = (id: string) => {
-    const newState = Object.assign({}, isOpen, { [id]: !isOpen[id] });
-    setIsOpen(newState);
+    setIsOpen(Object.assign({}, isOpen, { [id]: !isOpen[id] }));
   };
 
   const programCard = (channels: Array<ProgDetails>) =>
     channels.map(progDetails => {
-      const { s, title, channel_logo, channel_label, start, end } = progDetails;
+      const {
+        db_id,
+        title,
+        channel_logo,
+        channel_label,
+        start,
+        end,
+        is_passed,
+      } = progDetails;
+
       return (
-        <li key={s} className="program-card" onClick={onClick.bind(this, s)}>
+        <li
+          key={db_id}
+          className={`card${is_passed ? ' passed' : ''}`}
+          onClick={onClick.bind(this, db_id)}
+        >
           <div className="logo">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={channel_logo} alt={channel_label} loading="lazy" />
+            <Image
+              src={channel_logo}
+              alt={channel_label}
+              width={40}
+              height={40}
+              layout="fixed"
+              quality={100}
+            />
           </div>
-          <div className="program-info">
+          <div className="info">
             <div className="details">
               <h3>{title}</h3>
               {start} - {end}
             </div>
-            <Details programDetails={progDetails} isOpen={isOpen[s]} />
+            <Details programDetails={progDetails} isOpen={isOpen[db_id]} />
             <Sharer programDetails={progDetails} />
           </div>
         </li>
       );
     });
 
-  return (
-    <>
-      <h1>{title}</h1>
-      <ol>{programData.map(channels => programCard(channels))}</ol>
-    </>
-  );
+  return <ol>{programData.map(channels => programCard(channels))}</ol>;
 };
 
 export default Card;

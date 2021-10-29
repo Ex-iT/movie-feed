@@ -3,7 +3,7 @@ body {
   -webkit-text-size-adjust: 100%;
   font-size: 16px;
   line-height: 1;
-  background-color: #000000;
+  background-color: #000;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -17,15 +17,17 @@ body {
 
 main {
   position: relative;
-  color: #ffffff;
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
   line-height: 1.375em;
   padding: 1em;
   min-height: 100vh;
   overflow: hidden;
+}
 
-  @media screen and (min-width: 720px) {
+@media screen and (min-width: 720px) {
+  main {
     display: flex;
   }
 }
@@ -82,21 +84,21 @@ ol {
 
 .today {
   margin-bottom: 30px;
-
-  @media screen and (min-width: 720px) {
-    margin-right: 10px;
-  }
 }
 
-.today,
-.tomorrow {
-  @media screen and (min-width: 720px) {
+@media screen and (min-width: 720px) {
+  .today {
+    margin-right: 10px;
+  }
+
+  .today,
+  .tomorrow {
     flex: 1 1 50%;
   }
 }
 
-.program-card,
-.error-block {
+.card {
+  cursor: pointer;
   display: flex;
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.2);
@@ -106,11 +108,11 @@ ol {
   width: 100%;
 }
 
-.program-card {
-  cursor: pointer;
+.card.passed {
+  opacity: 0.7;
 }
 
-.program-info {
+.info {
   position: relative;
   width: 100%;
   padding-right: 30px;
@@ -118,11 +120,6 @@ ol {
 
 .logo {
   margin-right: 10px;
-}
-
-.logo img {
-  width: 40px;
-  height: 40px;
 }
 
 .asset-details {
@@ -172,9 +169,10 @@ ol {
   margin: 0 0 10px 0;
 }
 
-.asset-image img {
+.asset-image span {
+  display: inline-block;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 100%;
+  vertical-align: middle;
 }
 
 @media screen and (min-width: 720px) {
@@ -192,78 +190,8 @@ ol {
   right: 0;
   border: none;
   background: transparent;
-  fill: #ffffff;
+  fill: #fff;
   padding: 0;
   width: 25px;
   height: auto;
-}
-
-.error-block {
-  color: #ffffff;
-  border: 3px solid rgba(255, 0, 0, 0.6);
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 1em;
-  line-height: 1.375em;
-  align-items: center;
-  transition: opacity 0.3s ease-out;
-}
-
-.error-block .description {
-  padding-right: 20px;
-  flex: 0 1 auto;
-}
-
-.error-block .icon-reload {
-  flex: 0 0 auto;
-  margin-left: auto;
-}
-
-.error-block:not([disabled]) {
-  cursor: pointer;
-}
-
-.icon-reload {
-  display: block;
-  height: 2em;
-  padding: 0.25em;
-  width: 2em;
-  transform: rotate(45deg);
-}
-
-.icon-reload:before,
-.icon-reload:after {
-  content: '';
-  display: block;
-}
-
-.icon-reload:before {
-  border-color: transparent rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.7) rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 0.2em;
-  height: 1.5em;
-  width: 1.5em;
-  transform: rotate(45deg);
-}
-
-.icon-reload:after {
-  border-color: transparent transparent transparent rgba(255, 255, 255, 0.7);
-  border-style: solid;
-  border-width: 0.3125em 0 0.3125em 0.5em;
-  height: 0;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 0;
-}
-
-.icon-reload.spin {
-  animation: rotate 1.5s linear infinite;
-  transform: rotate(0);
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
 }
