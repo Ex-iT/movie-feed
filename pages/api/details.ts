@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { CHANNEL_INFO, CHANNEL_LOGO_SRC, DEEP_LINK, EMPTY_IMG, PROGRAM_URI } from '../../config';
 import { Error, ProgDetails } from '../../types/sharedTypes';
 import slugify from 'slugify';
+import formatTime from '../../lib/formatTime';
+import formatDate from '../../lib/formatDate';
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,9 +35,10 @@ export async function getDetails(id: string) {
       progDetails.channel_logo = getChannelLogo(ch_id);
       progDetails.channel_label = getChannelLabel(ch_id);
       progDetails.deep_link = getDeepLinkUrl(title, db_id);
-      progDetails.start = formatTime(s);
-      progDetails.end = formatTime(e);
-      progDetails.day = formatDate(s);
+      progDetails.start = formatTime(parseInt(s, 10));
+      progDetails.end = formatTime(parseInt(e, 10));
+      progDetails.day = formatDate(parseInt(s, 10));
+      progDetails.is_passed = +new Date() > parseInt(e, 10) * 1000;
     }
 
     return progDetails;
@@ -49,7 +52,7 @@ function getChannelLogo(id: string) {
 }
 
 function getChannelLabel(id: string) {
-  return CHANNEL_INFO[id];
+  return CHANNEL_INFO[id] || '';
 }
 
 function getDeepLinkUrl(title: string, id: string) {
@@ -57,16 +60,3 @@ function getDeepLinkUrl(title: string, id: string) {
   return `${DEEP_LINK}/${slug}/${id}`;
 }
 
-function formatTime(timestamp: number) {
-  console.log(timestamp);
-  return new Date(timestamp * 1000).toLocaleTimeString('nl-NL', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-function formatDate(timestamp: number) {
-  return new Date(timestamp * 1000).toLocaleDateString('nl-NL', {
-    weekday: 'long'
-  });
-}

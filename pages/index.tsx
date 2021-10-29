@@ -35,16 +35,12 @@ const Home = ({ programsToday, programsTomorrow }: HomeProps) => {
       </Head>
       <main>
         <section className="today">
-          <Card
-            title="Films vandaag op televisie"
-            programData={programsToday}
-          />
+          <h1>Films vandaag op televisie</h1>
+          <Card programData={programsToday} />
         </section>
         <section className="tomorrow">
-          <Card
-            title="Films morgen op televisie"
-            programData={programsTomorrow}
-          />
+          <h1>Films morgen op televisie</h1>
+          <Card programData={programsTomorrow} />
         </section>
       </main>
     </>
