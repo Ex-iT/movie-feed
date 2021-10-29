@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProgDetails } from '../../types/sharedTypes';
-import DangerouslySetHtmlContent from '../DangeouslySetHtmlContent';
+import DangerouslySetHtmlContent from '../DangerouslySetHtmlContent';
 import MetaInfo from '../MetaInfo';
 
 interface DetailsProps {
