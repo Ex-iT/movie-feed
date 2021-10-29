@@ -1,8 +1,9 @@
 # Moviefeed
 
-Daily listing of movies on Dutch TV using the [TVgids.nl](https://www.tvgids.nl/) API.
+Daily listing of movies on Dutch TV using the [TVgids.nl](https://www.tvgids.nl/) API. This web app is suitable to be 'installed' on a mobile device which allows native sharing.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
 
 ## Development
 
