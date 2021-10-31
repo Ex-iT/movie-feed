@@ -108,8 +108,8 @@ ol {
   width: 100%;
 }
 
-.card.passed {
-  opacity: 0.7;
+.card.passed .details {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .info {
@@ -169,9 +169,14 @@ ol {
   margin: 0 0 10px 0;
 }
 
+.asset-image img,
+.asset-image span {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 100%;
+}
+
 .asset-image span {
   display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   vertical-align: middle;
 }
 
