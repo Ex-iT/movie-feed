@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ProgDetails } from '../../types/sharedTypes';
-import Card from './Card';
+import Channel from './Channel';
 
 interface CardsProps {
   programData: Array<Array<ProgDetails>>;
@@ -9,8 +9,8 @@ interface CardsProps {
 const Cards = ({ programData }: CardsProps) => {
   return (
     <ol>
-      {programData.map((programDetails, index) => (
-        <Card key={index} programDetails={programDetails} />
+      {programData.map((channelPrograms, index) => (
+        <Channel key={index} channelPrograms={channelPrograms} />
       ))}
     </ol>
   );

@@ -98,6 +98,7 @@ ol {
 }
 
 .card {
+  position: relative;
   cursor: pointer;
   display: flex;
   margin-bottom: 10px;
@@ -110,7 +111,17 @@ ol {
 
 .card.passed .details {
   color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease-in;
 }
+
+/* .card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid rgba(225, 75, 75, 1);
+  width: 0;
+} */
 
 .info {
   position: relative;
@@ -169,13 +180,8 @@ ol {
   margin: 0 0 10px 0;
 }
 
-.asset-image img,
 .asset-image span {
   border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 100%;
-}
-
-.asset-image span {
   display: inline-block;
   vertical-align: middle;
 }

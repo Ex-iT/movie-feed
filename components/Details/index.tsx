@@ -15,8 +15,6 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
     <div className={`asset-details${isOpen ? ' open' : ''}`}>
       {img && (
         <div className="asset-image">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          {/* <img src={img} alt={title} loading="lazy" /> */}
           <span>
             <Image
               src={img}
