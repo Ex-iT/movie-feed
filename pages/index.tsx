@@ -10,8 +10,14 @@ const Home = () => {
   useEffect(() => {
     const fetchPrograms = async () => {
       const programsToday = await fetchData('/api/movies?day=today');
-      const programsTomorrow = await fetchData('/api/movies?day=tomorrow');
       setProgramsToday(programsToday);
+    };
+    fetchPrograms();
+  }, []);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      const programsTomorrow = await fetchData('/api/movies?day=tomorrow');
       setProgramsTomorrow(programsTomorrow);
     };
     fetchPrograms();
