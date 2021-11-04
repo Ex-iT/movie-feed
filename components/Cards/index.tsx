@@ -7,11 +7,21 @@ interface CardsProps {
 }
 
 const Cards = ({ programData }: CardsProps) => {
+  const skeleton = (
+    <>
+      <li className="card loading"></li>
+      <li className="card loading"></li>
+      <li className="card loading"></li>
+    </>
+  );
+
   return (
     <ol>
-      {programData.map((channelPrograms, index) => (
-        <Channel key={index} channelPrograms={channelPrograms} />
-      ))}
+      {!!programData.length
+        ? programData.map((channelPrograms, index) => (
+            <Channel key={index} channelPrograms={channelPrograms} />
+          ))
+        : skeleton}
     </ol>
   );
 };

@@ -1,34 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DefaultLayout from '../Layout/DefaultLayout';
+import fetchData from '../lib/fetchData';
 import HomePage from '../pageComponents/HomePage';
-import { Days, ProgDetails } from '../types/sharedTypes';
-import { getAggregatedData } from './api/movies';
 
-interface HomeProps {
-  programsToday: Array<Array<ProgDetails>>;
-  programsTomorrow: Array<Array<ProgDetails>>;
-}
+const Home = () => {
+  const [programsToday, setProgramsToday] = useState([]);
+  const [programsTomorrow, setProgramsTomorrow] = useState([]);
 
-const Home = (props: HomeProps) => {
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      const programsToday = await fetchData('/api/movies?day=today');
+      const programsTomorrow = await fetchData('/api/movies?day=tomorrow');
+      setProgramsToday(programsToday);
+      setProgramsTomorrow(programsTomorrow);
+    };
+    fetchPrograms();
+  }, []);
+
   return (
     <DefaultLayout>
-      <HomePage {...props} />
+      <HomePage
+        programsToday={programsToday}
+        programsTomorrow={programsTomorrow}
+      />
     </DefaultLayout>
   );
 };
-
-export async function getServerSideProps() {
-  const [programsToday, programsTomorrow] = await Promise.all([
-    getAggregatedData(Days.today),
-    getAggregatedData(Days.tomorrow),
-  ]);
-
-  return {
-    props: {
-      programsToday,
-      programsTomorrow,
-    },
-  };
-}
 
 export default Home;

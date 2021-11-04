@@ -4,6 +4,7 @@ import { Error, ProgDetails } from '../../types/sharedTypes';
 import slugify from 'slugify';
 import formatTime from '../../lib/formatTime';
 import formatDate from '../../lib/formatDate';
+import fetchData from '../../lib/fetchData';
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,8 +27,7 @@ export default async function handler(
 export async function getDetails(id: string) {
   const uri = PROGRAM_URI;
   try {
-    const response = await fetch(`${uri}/${id}`);
-    const json = await response.json();
+    const json = await fetchData(`${uri}/${id}`);
     const progDetails = json?.data || {};
 
     if ('title' in progDetails && 's' in progDetails && 'e' in progDetails) {

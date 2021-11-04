@@ -99,7 +99,6 @@ ol {
 
 .card {
   position: relative;
-  cursor: pointer;
   display: flex;
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.2);
@@ -112,6 +111,24 @@ ol {
 .card.passed .details {
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.3s ease-in;
+}
+
+.card:not(.loading) {
+  cursor: pointer;
+}
+
+.card.loading::after {
+  animation: 1.6s linear 0.5s infinite normal none running swipe;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  content: '';
+  position: absolute;
+  transform: translateX(-100%);
+  inset: 0px;
 }
 
 /* .card::after {
@@ -205,4 +222,25 @@ ol {
   padding: 0;
   width: 25px;
   height: auto;
+}
+
+@keyframes swipe {
+  0% {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  50% {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
 }

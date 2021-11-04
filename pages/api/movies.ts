@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { CHANNELS, GENRE_ID, PROGRAMS_URI } from '../../config';
+import fetchData from '../../lib/fetchData';
 import { Data, Days, Error, Prog, ProgDetails } from '../../types/sharedTypes';
 import { getDetails } from './details';
 
@@ -54,8 +55,7 @@ export async function getMovies(day = Days.today) {
   const uri = PROGRAMS_URI;
 
   try {
-    const response = await fetch(`${uri}/?day=${day}`);
-    const json = await response.json();
+    const json = await fetchData(`${uri}/?day=${day}`);
     const movies = filterChannels(json?.data || []);
 
     return movies;
