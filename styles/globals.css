@@ -117,8 +117,12 @@ ol {
   cursor: pointer;
 }
 
+.card.loading {
+  overflow: hidden;
+}
+
 .card.loading::after {
-  animation: 1.6s linear 0.5s infinite normal none running swipe;
+  animation: 1.5s linear 0.5s infinite normal none running swipe;
   background: linear-gradient(
     90deg,
     transparent,
@@ -131,14 +135,14 @@ ol {
   inset: 0px;
 }
 
-/* .card::after {
-  content: '';
+.card .progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
-  border-bottom: 2px solid rgba(225, 75, 75, 1);
+  right: 0;
+  border-bottom: 2px solid rgba(225, 75, 75, 0.8);
   width: 0;
-} */
+}
 
 .info {
   position: relative;
@@ -226,21 +230,9 @@ ol {
 
 @keyframes swipe {
   0% {
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
     transform: translateX(-100%);
   }
-  50% {
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    -ms-transform: translateX(100%);
-    transform: translateX(100%);
-  }
   100% {
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    -ms-transform: translateX(100%);
     transform: translateX(100%);
   }
 }

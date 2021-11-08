@@ -1,10 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CHANNEL_INFO, CHANNEL_LOGO_SRC, DEEP_LINK, EMPTY_IMG, PROGRAM_URI } from '../../config';
+import {
+  CHANNEL_INFO,
+  CHANNEL_LOGO_SRC,
+  DEEP_LINK,
+  EMPTY_IMG,
+  PROGRAM_URI,
+} from '../../config';
 import { Error, ProgDetails } from '../../types/sharedTypes';
 import slugify from 'slugify';
 import formatTime from '../../lib/formatTime';
 import formatDate from '../../lib/formatDate';
 import fetchData from '../../lib/fetchData';
+import getProgress from '../../lib/getProgress';
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,13 +39,18 @@ export async function getDetails(id: string) {
 
     if ('title' in progDetails && 's' in progDetails && 'e' in progDetails) {
       const { title, db_id, ch_id, s, e } = progDetails;
+      const start = parseInt(s, 10);
+      const end = parseInt(e, 10);
+      const now = Math.round(new Date().getTime() / 1000);
+
       progDetails.channel_logo = getChannelLogo(ch_id);
       progDetails.channel_label = getChannelLabel(ch_id);
       progDetails.deep_link = getDeepLinkUrl(title, db_id);
-      progDetails.start = formatTime(parseInt(s, 10));
-      progDetails.end = formatTime(parseInt(e, 10));
-      progDetails.day = formatDate(parseInt(s, 10));
-      progDetails.is_passed = +new Date() > parseInt(e, 10) * 1000;
+      progDetails.start = formatTime(start);
+      progDetails.end = formatTime(end);
+      progDetails.day = formatDate(start);
+      progDetails.is_passed = now > end;
+      progDetails.progress = getProgress(now, start, end);
     }
 
     return progDetails;
@@ -59,4 +71,3 @@ function getDeepLinkUrl(title: string, id: string) {
   const slug = slugify(title, { lower: true, strict: true, locale: 'nl' });
   return `${DEEP_LINK}/${slug}/${id}`;
 }
-
