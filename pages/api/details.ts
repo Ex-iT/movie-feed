@@ -12,6 +12,7 @@ import formatTime from '../../lib/formatTime';
 import formatDate from '../../lib/formatDate';
 import fetchData from '../../lib/fetchData';
 import getProgress from '../../lib/getProgress';
+import getEpoch from '../../lib/getEpoch';
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,7 +42,7 @@ export async function getDetails(id: string) {
       const { title, db_id, ch_id, s, e } = progDetails;
       const start = parseInt(s, 10);
       const end = parseInt(e, 10);
-      const now = Math.round(new Date().getTime() / 1000);
+      const now = getEpoch();
 
       progDetails.channel_logo = getChannelLogo(ch_id);
       progDetails.channel_label = getChannelLabel(ch_id);
