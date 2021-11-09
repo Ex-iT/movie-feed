@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import getEpoch from '../../lib/getEpoch';
 import getProgress from '../../lib/getProgress';
 import { ProgDetails } from '../../types/sharedTypes';
 import ChannelLogo from '../ChannelLogo';
@@ -35,8 +36,8 @@ const Card = ({ programDetails }: CardProps) => {
     let rAF: any = null;
 
     if (hasWindow) {
-      const now = Math.round(new Date().getTime() / 1000);
       const endTime = parseInt(e, 10);
+      let now = getEpoch();
 
       const checkIsPassed = () => {
         if (!is_passed && now > endTime) {
@@ -45,6 +46,7 @@ const Card = ({ programDetails }: CardProps) => {
         window.cancelAnimationFrame(rAF);
 
         setTimeout(() => {
+          now = getEpoch();
           rAF = window.requestAnimationFrame(checkIsPassed);
         }, tickTime);
       };
@@ -63,20 +65,23 @@ const Card = ({ programDetails }: CardProps) => {
     let rAF: any = null;
 
     if (hasWindow) {
-      const now = Math.round(new Date().getTime() / 1000);
       const startTime = parseInt(s, 10);
       const endTime = parseInt(e, 10);
+      let now = getEpoch();
 
       const updateProgress = () => {
-        if (!is_passed) {
+        if (is_passed) {
+          setData(data => Object.assign({}, data, { progress: 0 }));
+          window.cancelAnimationFrame(rAF);
+        } else {
           const progress = getProgress(now, startTime, endTime);
           if (progress > 0) {
             setData(data => Object.assign({}, data, { progress }));
           }
         }
-        window.cancelAnimationFrame(rAF);
 
         setTimeout(() => {
+          now = getEpoch();
           rAF = window.requestAnimationFrame(updateProgress);
         }, tickTime);
       };

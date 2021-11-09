@@ -142,6 +142,7 @@ ol {
   right: 0;
   border-bottom: 2px solid rgba(225, 75, 75, 0.8);
   width: 0;
+  transition: width 0.3s ease-out;
 }
 
 .info {
