@@ -13,7 +13,7 @@ interface CardProps {
 const Card = ({ programDetails }: CardProps) => {
   const [isOpen, setIsOpen] = useState<{ [key: string]: boolean }>({});
   const [data, setData] = useState(programDetails);
-  const tickTime = 3e3;
+  const tickTime = 1e3;
   const hasWindow = typeof window !== 'undefined';
   const {
     s,

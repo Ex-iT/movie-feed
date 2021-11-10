@@ -141,6 +141,8 @@ ol {
   left: 0;
   right: 0;
   border-bottom: 2px solid rgba(225, 75, 75, 0.8);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
   width: 0;
   transition: width 0.3s ease-out;
 }
