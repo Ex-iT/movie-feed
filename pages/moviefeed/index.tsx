@@ -1,3 +1,7 @@
+const Moviefeed = () => {
+  return;
+};
+
 export function getServerSideProps() {
   return {
     redirect: {
@@ -6,3 +10,5 @@ export function getServerSideProps() {
     },
   };
 }
+
+export default Moviefeed;
