@@ -8,19 +8,16 @@ const Home = () => {
   const [programsTomorrow, setProgramsTomorrow] = useState([]);
 
   useEffect(() => {
-    const fetchPrograms = async () => {
-      const programsToday = await fetchData('/api/movies?day=today');
-      setProgramsToday(programsToday);
+    const fetchProgramsToday = async () => {
+      setProgramsToday(await fetchData('/api/movies?day=today'));
     };
-    fetchPrograms();
-  }, []);
 
-  useEffect(() => {
-    const fetchPrograms = async () => {
-      const programsTomorrow = await fetchData('/api/movies?day=tomorrow');
-      setProgramsTomorrow(programsTomorrow);
+    const fetchProgramsTomorrow = async () => {
+      setProgramsTomorrow(await fetchData('/api/movies?day=tomorrow'));
     };
-    fetchPrograms();
+
+    fetchProgramsToday();
+    fetchProgramsTomorrow();
   }, []);
 
   return (

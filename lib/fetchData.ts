@@ -1,6 +1,10 @@
 const fetchData = async (uri: string) => {
   try {
-    const response = await fetch(uri);
+    const response = await fetch(uri, {
+      headers: {
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
 
     if (response.status === 200) {
       const json = await response.json();
