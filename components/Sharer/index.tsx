@@ -19,7 +19,7 @@ const Sharer = ({ programDetails }: SharerProps) => {
 
     navigator.share({
       title: `${title} ${day} op ${channel_label} om ${start}`,
-      text: `${title}\n${ucFirst(day)} ${channel_label}, ${start} - ${end}`,
+      text: `${title}\n${ucFirst(day)} ${channel_label}, ${start} - ${end}\n`,
       url: deep_link,
     });
   };
