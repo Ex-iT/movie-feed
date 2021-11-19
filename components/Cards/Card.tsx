@@ -114,7 +114,9 @@ const Card = ({ programDetails }: CardProps) => {
         <Sharer programDetails={programDetails} />
       </div>
       {progress > 0 && (
-        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+        <div className="progress-bar">
+          <div style={{ width: `${progress}%` }}></div>
+        </div>
       )}
     </li>
   );

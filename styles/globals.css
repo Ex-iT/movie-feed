@@ -140,9 +140,20 @@ ol {
   bottom: 0;
   left: 0;
   right: 0;
+  border-bottom: 2px solid rgba(225, 75, 75, 0.3);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.card .progress-bar > div {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  width: 0;
   border-bottom: 2px solid rgba(225, 75, 75, 0.8);
   border-bottom-left-radius: 2px;
-  width: 0;
   transition: width 0.3s ease-out;
 }
 
