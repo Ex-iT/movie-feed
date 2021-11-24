@@ -21,8 +21,6 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
               alt={title}
               width={615}
               height={400}
-              quality={100}
-              unoptimized={true}
             />
           </span>
         </div>
