@@ -107,7 +107,7 @@ const Card = ({ programDetails }: CardProps) => {
       <ChannelLogo src={channel_logo} alt={channel_label} />
       <div className="info">
         <div className="details">
-          <h3>{title}</h3>
+          <h2>{title}</h2>
           {start} - {end}
         </div>
         <Details programDetails={programDetails} isOpen={isOpen[db_id]} />
