@@ -30,6 +30,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
         />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://tvgidsassets.nl" />
         <title>{title}</title>
       </Head>
       <main>{children}</main>
