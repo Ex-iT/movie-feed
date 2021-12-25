@@ -43,6 +43,7 @@ export interface EnrichedProg extends Prog {
   progress: number;
 }
 
+// Check where this is used and refactor
 export interface ProgDetails {
   db_id: string;
   ch_id: string;
@@ -83,5 +84,6 @@ export interface ProgDetails {
   descr_short: string;
   is_passed: boolean;
   progress: number;
+  ei: string;
 }
 
