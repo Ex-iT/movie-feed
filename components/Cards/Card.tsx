@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import getEpoch from '../../lib/getEpoch';
 import getProgress from '../../lib/getProgress';
-import { ProgDetails } from '../../types/sharedTypes';
+import { EnrichedProg } from '../../types/sharedTypes';
 import ChannelLogo from '../ChannelLogo';
 import Details from '../Details';
 import Sharer from '../Sharer';
 
 interface CardProps {
-  programDetails: ProgDetails;
+  programDetails: EnrichedProg;
 }
 
 const Card = ({ programDetails }: CardProps) => {
@@ -62,7 +62,7 @@ const Card = ({ programDetails }: CardProps) => {
   }, [hasWindow, is_passed, e]);
 
   useEffect(() => {
-    let rAF: any = null;
+    let rAF: number = 0;
 
     if (hasWindow) {
       const startTime = parseInt(s, 10);
@@ -110,8 +110,8 @@ const Card = ({ programDetails }: CardProps) => {
           <h2>{title}</h2>
           {start} - {end}
         </div>
-        <Details programDetails={programDetails} isOpen={isOpen[db_id]} />
-        <Sharer programDetails={programDetails} />
+        {/* <Details programDetails={programDetails} isOpen={isOpen[db_id]} />
+        <Sharer programDetails={programDetails} /> */}
       </div>
       {progress > 0 && (
         <div className="progress-bar">

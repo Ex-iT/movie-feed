@@ -68,13 +68,13 @@ function filterChannels(channels: Array<Data>) {
   const channelData = channels.filter(channel =>
     CHANNELS.includes(parseInt(channel.ch_id, 10)),
   );
-  return filterMovies(channelData);
+  return filterGenre(GENRE_ID, channelData);
 }
 
-function filterMovies(channelData: Array<Data>) {
+function filterGenre(genreId: number, channelData: Array<Data>) {
   return channelData
     .map(channel =>
-      channel.prog.filter(prog => parseInt(prog.g_id, 10) === GENRE_ID),
+      channel.prog.filter(prog => parseInt(prog.g_id, 10) === genreId),
     )
     .filter(item => item.length);
 }

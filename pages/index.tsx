@@ -9,11 +9,11 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProgramsToday = async () => {
-      setProgramsToday(await fetchData('/api/movies?day=today'));
+      setProgramsToday(await fetchData('/api/v1/movies?day=today'));
     };
 
     const fetchProgramsTomorrow = async () => {
-      setProgramsTomorrow(await fetchData('/api/movies?day=tomorrow'));
+      setProgramsTomorrow(await fetchData('/api/v1/movies?day=tomorrow'));
     };
 
     fetchProgramsToday();

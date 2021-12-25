@@ -1,3 +1,8 @@
+export interface Error {
+  ok: boolean;
+  error: string;
+}
+
 export enum Days {
   today = '0',
   tomorrow = '1',
@@ -27,6 +32,15 @@ export interface Prog {
   is_type: string;
   subgenre: string;
   ch_id: string;
+}
+
+export interface EnrichedProg extends Prog {
+  channel_logo: string;
+  channel_label: string;
+  start: string;
+  end: string;
+  is_passed: boolean;
+  progress: number;
 }
 
 export interface ProgDetails {
@@ -71,7 +85,3 @@ export interface ProgDetails {
   progress: number;
 }
 
-export interface Error {
-  ok: boolean;
-  error: string;
-}
