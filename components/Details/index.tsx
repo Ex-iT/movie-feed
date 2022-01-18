@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { EnrichedProg, MovieDetails } from '../../types/sharedTypes';
-import DangerouslySetHtmlContent from '../DangerouslySetHtmlContent';
 import MetaInfo from '../MetaInfo';
 import fetchData from '../../lib/fetchData';
+import { EMPTY_IMG } from '../../config';
 
 interface DetailsProps {
   programDetails: EnrichedProg;
@@ -29,26 +29,24 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
 
   return (
     <div className={`asset-details${isOpen ? ' open' : ''}`}>
-      {movieDetails.generic?.image && (
-        <div className="asset-image">
-          <span>
-            <Image
-              src={movieDetails.generic.image}
-              alt={title}
-              width={615}
-              height={400}
-              unoptimized={true}
-            />
-          </span>
-        </div>
-      )}
+      <div className="asset-image">
+        <span>
+          <Image
+            src={movieDetails.generic?.image || EMPTY_IMG}
+            alt={title}
+            width={615}
+            height={400}
+            unoptimized={true}
+          />
+        </span>
+      </div>
       <div className="synopsis">
         {subgenre ? (
           <strong className="prefix-description">{subgenre}</strong>
         ) : (
           <p className="loading"></p>
         )}
-        {descr ? <DangerouslySetHtmlContent html={descr} /> : <br />}
+        {descr ? <p>{descr}</p> : <br />}
         <MetaInfo programDetails={programDetails} movieDetails={movieDetails} />
       </div>
     </div>
