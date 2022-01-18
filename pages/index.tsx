@@ -1,11 +1,17 @@
+import { GetServerSideProps } from 'next';
 import React, { useEffect, useState } from 'react';
+import { CACHING_DEFAULT } from '../config';
 import DefaultLayout from '../Layout/DefaultLayout';
 import fetchData from '../lib/fetchData';
 import HomePage from '../pageComponents/HomePage';
 
-const Home = () => {
-  const [programsToday, setProgramsToday] = useState([]);
-  const [programsTomorrow, setProgramsTomorrow] = useState([]);
+interface HomeProps {
+  placeHolder: [];
+}
+
+const Home = ({ placeHolder }: HomeProps) => {
+  const [programsToday, setProgramsToday] = useState(placeHolder);
+  const [programsTomorrow, setProgramsTomorrow] = useState(placeHolder);
 
   useEffect(() => {
     const fetchProgramsToday = async () => {
@@ -29,5 +35,15 @@ const Home = () => {
     </DefaultLayout>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  res.setHeader('Cache-Control', CACHING_DEFAULT);
+
+  return {
+    props: {
+      placeHolder: []
+    }
+  }
+}
 
 export default Home;

@@ -8,30 +8,18 @@ export enum Days {
   tomorrow = '1',
 }
 
-export interface Data {
-  ch_id: string;
-  prog: Array<Prog>;
-}
-
 export interface Prog {
-  s: string;
-  db_id: string;
-  e: string;
-  title: string;
-  descr: string;
-  img: string;
-  g_id: string;
-  tip: string;
-  article_id?: string;
-  rerun: string;
-  rating?: string;
-  tvg_rating?: string;
-  live: string;
-  is_premiere: string;
-  ei: string;
-  is_type: string;
-  subgenre: string;
+  db_id?: string; // Legacy ID
+  ps: string;
+  pe: string;
   ch_id: string;
+  title: string;
+  descr?: string;
+  rating?: string;
+  is_type?: string;
+  subgenre?: string;
+  tvg_rating?: string;
+  main_id: string;
 }
 
 export interface EnrichedProg extends Prog {
@@ -41,49 +29,35 @@ export interface EnrichedProg extends Prog {
   end: string;
   is_passed: boolean;
   progress: number;
-}
-
-// Check where this is used and refactor
-export interface ProgDetails {
-  db_id: string;
-  ch_id: string;
-  title: string;
-  g: string;
-  prog_sort: string;
-  descr: string;
-  year: string;
-  dir: string;
-  country: string;
-  broadcast: string;
-  s: string;
-  e: string;
-  img: string;
-  act: string;
-  scen: string;
-  comp: string;
-  rating: string;
-  rerun: string;
-  g_id: string;
-  kijkw: string;
-  grouped_id: string;
-  tip: string;
-  is_premiere: string;
-  is_start: string;
-  is_last: string;
-  live: string;
-  is_type: string;
-  subgenre: string;
-  related: Array<any>;
-  ondemand: Array<any>;
-  channel_logo: string;
-  channel_label: string;
   deep_link: string;
-  start: string;
-  end: string;
   day: string;
-  descr_short: string;
-  is_passed: boolean;
-  progress: number;
-  ei: string;
 }
 
+export interface MovieDetails {
+  generic: Generic;
+  metadata: {
+    items: Array<Items>;
+    guidance: Array<Guidance>;
+  };
+}
+
+interface Generic {
+  id: number;
+  title: string;
+  year?: string;
+  yt_id?: string;
+  subcategory?: string;
+  image?: string;
+  duration?: string;
+}
+
+interface Items {
+  label: string;
+  value: string;
+}
+
+interface Guidance {
+  name: string;
+  short: string;
+  icon: string;
+}

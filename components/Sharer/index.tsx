@@ -1,9 +1,9 @@
 import React, { MouseEvent } from 'react';
 import ucFirst from '../../lib/ucFirst';
-import { ProgDetails } from '../../types/sharedTypes';
+import { EnrichedProg } from '../../types/sharedTypes';
 
 interface SharerProps {
-  programDetails: ProgDetails;
+  programDetails: EnrichedProg;
 }
 
 const Sharer = ({ programDetails }: SharerProps) => {
@@ -11,7 +11,7 @@ const Sharer = ({ programDetails }: SharerProps) => {
     typeof window !== 'undefined' ? !!window.navigator?.share : false;
 
   const shareItem = (
-    programDetails: ProgDetails,
+    programDetails: EnrichedProg,
     event: MouseEvent<HTMLButtonElement>,
   ) => {
     const { deep_link, title, channel_label, start, end, day } = programDetails;

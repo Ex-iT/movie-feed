@@ -120,20 +120,6 @@ ol {
   overflow: hidden;
 }
 
-.card.loading::after {
-  animation: 1.5s linear 0.5s infinite normal none running swipe;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
-  content: '';
-  position: absolute;
-  transform: translateX(-100%);
-  inset: 0px;
-}
-
 .card .progress-bar {
   position: absolute;
   bottom: 0;
@@ -192,6 +178,8 @@ ol {
 }
 
 .synopsis p {
+  position: relative;
+  min-height: 22px;
   margin-bottom: 5px;
 }
 
@@ -238,6 +226,39 @@ ol {
   padding: 0;
   width: 25px;
   height: auto;
+}
+
+.guidance {
+  display: flex;
+}
+
+.guidance ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.guidance li {
+  margin-left: 0.5em;
+}
+
+.guidance img {
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.loading::after {
+  animation: 1.5s linear 0.5s infinite normal none running swipe;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  content: '';
+  position: absolute;
+  transform: translateX(-100%);
+  inset: 0px;
 }
 
 @keyframes swipe {

@@ -16,9 +16,9 @@ const Card = ({ programDetails }: CardProps) => {
   const tickTime = 1e3;
   const hasWindow = typeof window !== 'undefined';
   const {
-    s,
-    e,
-    db_id,
+    ps,
+    pe,
+    main_id,
     title,
     channel_logo,
     channel_label,
@@ -36,7 +36,7 @@ const Card = ({ programDetails }: CardProps) => {
     let rAF: any = null;
 
     if (hasWindow) {
-      const endTime = parseInt(e, 10);
+      const endTime = parseInt(pe, 10);
       let now = getEpoch();
 
       const checkIsPassed = () => {
@@ -59,14 +59,14 @@ const Card = ({ programDetails }: CardProps) => {
         window.cancelAnimationFrame(rAF);
       }
     };
-  }, [hasWindow, is_passed, e]);
+  }, [hasWindow, is_passed, pe]);
 
   useEffect(() => {
     let rAF: number = 0;
 
     if (hasWindow) {
-      const startTime = parseInt(s, 10);
-      const endTime = parseInt(e, 10);
+      const startTime = parseInt(ps, 10);
+      const endTime = parseInt(pe, 10);
       let now = getEpoch();
 
       const updateProgress = () => {
@@ -94,15 +94,14 @@ const Card = ({ programDetails }: CardProps) => {
         window.cancelAnimationFrame(rAF);
       }
     };
-  }, [hasWindow, is_passed, s, e]);
+  }, [hasWindow, is_passed, ps, pe]);
 
   return (
     <li
-      key={db_id}
       className={`card${is_passed ? ' passed' : ''}${
         progress > 0 ? ' progress' : ''
       }`}
-      onClick={onClick.bind(this, db_id)}
+      onClick={onClick.bind(this, main_id)}
     >
       <ChannelLogo src={channel_logo} alt={channel_label} />
       <div className="info">
@@ -110,8 +109,8 @@ const Card = ({ programDetails }: CardProps) => {
           <h2>{title}</h2>
           {start} - {end}
         </div>
-        {/* <Details programDetails={programDetails} isOpen={isOpen[db_id]} />
-        <Sharer programDetails={programDetails} /> */}
+        <Details programDetails={programDetails} isOpen={isOpen[main_id]} />
+        <Sharer programDetails={programDetails} />
       </div>
       {progress > 0 && (
         <div className="progress-bar">

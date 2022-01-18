@@ -1,9 +1,9 @@
 import React from 'react';
-import { ProgDetails } from '../../types/sharedTypes';
-import Channel from './Channel';
+import { EnrichedProg } from '../../types/sharedTypes';
+import Card from './Card';
 
 interface CardsProps {
-  programData: Array<Array<ProgDetails>>;
+  programData: Array<EnrichedProg>;
 }
 
 const Cards = ({ programData }: CardsProps) => {
@@ -17,9 +17,12 @@ const Cards = ({ programData }: CardsProps) => {
 
   return (
     <ol>
-      {!!programData.length
-        ? programData.map((channelPrograms, index) => (
-            <Channel key={index} channelPrograms={channelPrograms} />
+      {programData.length
+        ? programData.map((programs, index) => (
+            <Card
+              key={`${index}-${programs.main_id}`}
+              programDetails={programs}
+            />
           ))
         : skeleton}
     </ol>
