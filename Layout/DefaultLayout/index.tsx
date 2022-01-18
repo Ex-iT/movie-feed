@@ -24,10 +24,6 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
           name="description"
           content="Overzicht van de films vandaag op TV"
         />
-        <meta
-          name="keywords"
-          content="Films vandaag op TV, Vandaag op televisie, Films vandaag"
-        />
         <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://tvgidsassets.nl" />

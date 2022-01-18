@@ -1,50 +1,62 @@
 import React from 'react';
-import { ProgDetails } from '../../types/sharedTypes';
+import Image from 'next/image';
+import { EnrichedProg, MovieDetails } from '../../types/sharedTypes';
 
 interface MetaInfoProps {
-  programDetails: ProgDetails;
+  programDetails: EnrichedProg;
+  movieDetails: MovieDetails;
 }
 
-const MetaInfo = ({ programDetails }: MetaInfoProps) => {
-  const { rating, year, dir, act, scen, comp, country } = programDetails;
+const MetaInfo = ({ programDetails, movieDetails }: MetaInfoProps) => {
+  const { tvg_rating } = programDetails;
+  const {
+    generic,
+    metadata: { items, guidance },
+  } = movieDetails;
 
   return (
     <div className="meta-info">
-      {rating && (
+      {tvg_rating ? (
         <p>
-          <strong>Waardering:</strong> {rating} / 5.0
+          <strong>Waardering:</strong> {tvg_rating}
         </p>
+      ) : (
+        <p className="loading"></p>
       )}
-      {year && (
+      {generic.year ? (
         <p>
-          <strong>Jaar:</strong> {year}
+          <strong>Jaar:</strong> {generic.year}
         </p>
+      ) : (
+        <p className="loading"></p>
       )}
-      {dir && (
-        <p>
-          <strong>Regiseur:</strong> {dir}
+      {items.map(({ label, value }, index) => (
+        <p key={index}>
+          <strong>{label}:</strong> {value}
         </p>
-      )}
-      {act && (
-        <p>
-          <strong>Acteurs:</strong> {act}
-        </p>
-      )}
-      {scen && (
-        <p>
-          <strong>Scenario:</strong> {scen}
-        </p>
-      )}
-      {comp && (
-        <p>
-          <strong>Componist:</strong> {comp}
-        </p>
-      )}
-      {country && (
-        <p>
-          <strong>Land:</strong> {country}
-        </p>
-      )}
+      ))}
+      {guidance.length ? (
+        <div className="guidance">
+          <strong>Kijkwijzer:</strong>
+          <ul>
+            {guidance.map(({ name, icon }, index) => (
+              <li key={index}>
+                <span>
+                  <Image
+                    src={icon}
+                    alt={name}
+                    title={name}
+                    width={20}
+                    height={20}
+                    layout="fixed"
+                    quality={100}
+                  />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 };

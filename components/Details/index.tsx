@@ -1,41 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ProgDetails } from '../../types/sharedTypes';
-import DangerouslySetHtmlContent from '../DangerouslySetHtmlContent';
+import { EnrichedProg, MovieDetails } from '../../types/sharedTypes';
 import MetaInfo from '../MetaInfo';
+import fetchData from '../../lib/fetchData';
+import { EMPTY_IMG } from '../../config';
 
 interface DetailsProps {
-  programDetails: ProgDetails;
+  programDetails: EnrichedProg;
   isOpen?: boolean;
 }
 
 const Details = ({ programDetails, isOpen }: DetailsProps) => {
-  const { img, title, prog_sort, descr_short } = programDetails;
+  const { title, subgenre, descr, main_id } = programDetails;
+  const [movieDetails, setMovieDetails] = useState<MovieDetails>({
+    generic: { id: 0, title: '' },
+    metadata: { items: [], guidance: [] },
+  });
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      setMovieDetails(await fetchData(`/api/v1/details?id=${main_id}`));
+    };
+
+    if (isOpen) {
+      fetchDetails();
+    }
+  }, [isOpen, main_id]);
+
   return (
     <div className={`asset-details${isOpen ? ' open' : ''}`}>
-      {img && (
-        <div className="asset-image">
-          <span>
-            <Image
-              src={img}
-              alt={title}
-              width={615}
-              height={400}
-              unoptimized={true}
-            />
-          </span>
-        </div>
-      )}
+      <div className="asset-image">
+        <span>
+          <Image
+            src={movieDetails.generic?.image || EMPTY_IMG}
+            alt={title}
+            width={615}
+            height={400}
+            unoptimized={true}
+          />
+        </span>
+      </div>
       <div className="synopsis">
-        {prog_sort && (
-          <strong className="prefix-description">{prog_sort}</strong>
-        )}
-        {descr_short ? (
-          <DangerouslySetHtmlContent html={descr_short} />
+        {subgenre ? (
+          <strong className="prefix-description">{subgenre}</strong>
         ) : (
-          <br />
+          <p className="loading"></p>
         )}
-        <MetaInfo programDetails={programDetails} />
+        {descr ? <p>{descr}</p> : <br />}
+        <MetaInfo programDetails={programDetails} movieDetails={movieDetails} />
       </div>
     </div>
   );
