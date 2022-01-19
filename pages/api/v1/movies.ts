@@ -33,7 +33,7 @@ export default async function handler(
   }
 }
 
-async function getMovies(day = Days.today) {
+export async function getMovies(day = Days.today) {
   try {
     const json = await fetchData(`${MOVIES_URI}/?day=${day}`);
     return filterChannels(json?.data || []);
@@ -54,9 +54,9 @@ const enrichData = (channelData: Array<Prog>) => {
   return channelData
     .map(movie => {
       const { ch_id, ps, pe } = movie;
+      const now = getEpoch();
       const start = parseInt(ps, 10);
       let end = parseInt(pe, 10);
-      const now = getEpoch();
 
       // @TODO: end time on the next day (after 12 midnight)
       // is on the same day (date) as start time.
