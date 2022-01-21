@@ -36,8 +36,8 @@ export interface EnrichedProg extends Prog {
 export interface MovieDetails {
   generic: Generic;
   metadata: {
-    items: Array<Items>;
-    guidance: Array<Guidance>;
+    items?: Array<Items>;
+    guidance?: Array<Guidance>;
   };
 }
 

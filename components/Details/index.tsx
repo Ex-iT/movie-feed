@@ -41,11 +41,7 @@ const Details = ({ programDetails, isOpen }: DetailsProps) => {
         </span>
       </div>
       <div className="synopsis">
-        {subgenre ? (
-          <strong className="prefix-description">{subgenre}</strong>
-        ) : (
-          <p className="loading"></p>
-        )}
+        {subgenre && <strong className="prefix-description">{subgenre}</strong>}
         {descr ? <p>{descr}</p> : <br />}
         <MetaInfo programDetails={programDetails} movieDetails={movieDetails} />
       </div>

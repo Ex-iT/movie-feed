@@ -30,12 +30,12 @@ const MetaInfo = ({ programDetails, movieDetails }: MetaInfoProps) => {
       ) : (
         <p className="loading"></p>
       )}
-      {items.map(({ label, value }, index) => (
+      {items?.map(({ label, value }, index) => (
         <p key={index}>
           <strong>{label}:</strong> {value}
         </p>
       ))}
-      {guidance.length ? (
+      {guidance?.length ? (
         <div className="guidance">
           <strong>Kijkwijzer:</strong>
           <ul>
@@ -48,8 +48,6 @@ const MetaInfo = ({ programDetails, movieDetails }: MetaInfoProps) => {
                     title={name}
                     width={20}
                     height={20}
-                    layout="fixed"
-                    quality={100}
                   />
                 </span>
               </li>

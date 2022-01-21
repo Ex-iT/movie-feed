@@ -68,7 +68,7 @@ const enrichData = (channelData: Array<Prog>) => {
       return {
         ...movie,
         channel_logo: getChannelLogo(ch_id),
-        channel_label: getChannelLabel(ch_id),
+        channel_label: getChannelLabel(parseInt(ch_id, 10)),
         start: formatTime(start),
         end: formatTime(end),
         is_passed: now > end,
@@ -88,7 +88,7 @@ const getChannelLogo = (id: string) => {
   return id ? CHANNEL_LOGO_SRC.replace(/%s/g, id) : EMPTY_IMG;
 };
 
-const getChannelLabel = (id: string) => {
+const getChannelLabel = (id: number) => {
   return CHANNELS[id] || '';
 };
 

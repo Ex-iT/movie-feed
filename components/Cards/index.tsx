@@ -18,9 +18,9 @@ const Cards = ({ programData }: CardsProps) => {
   return (
     <ol>
       {programData.length
-        ? programData.map((programs, index) => (
+        ? programData.map(programs => (
             <Card
-              key={`${index}-${programs.main_id}`}
+              key={`${programs.ps}-${programs.main_id}`}
               programDetails={programs}
             />
           ))
