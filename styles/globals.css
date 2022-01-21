@@ -202,10 +202,28 @@ ol {
 }
 
 .asset-image span {
+  position: relative;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: inline-block;
   vertical-align: middle;
   max-width: 100%;
+}
+
+.asset-image span::before {
+  animation: 1.5s linear 0.5s infinite alternate none running pulse;
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -259,7 +277,7 @@ ol {
   content: '';
   position: absolute;
   transform: translateX(-100%);
-  inset: 0px;
+  inset: 0;
 }
 
 @keyframes swipe {
