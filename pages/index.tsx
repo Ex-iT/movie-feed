@@ -27,8 +27,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   return {
     props: {
-      programsToday: await getMovies(Days.today),
-      programsTomorrow: await getMovies(Days.tomorrow)
+      programsToday: await getMovies(Days.today) || [],
+      programsTomorrow: await getMovies(Days.tomorrow) || []
     },
   };
 };
