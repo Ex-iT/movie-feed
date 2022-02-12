@@ -7,7 +7,7 @@ import {
   DEEP_LINK,
   EMPTY_IMG,
   MOVIES_URI,
-  NEXT_STARTS_AT,
+  DAY_STARTS_AT,
 } from '../../../config';
 import fetchData from '../../../lib/fetchData';
 import formatDate from '../../../lib/formatDate';
@@ -63,7 +63,7 @@ const enrichData = (channelData: Array<Prog>) => {
 
       // Adjust start/end time to make the next
       // day start at `NEXT_STARTS_AT` at night
-      if (parseInt(formatHours(start), 10) <= NEXT_STARTS_AT) {
+      if (parseInt(formatHours(start), 10) <= DAY_STARTS_AT) {
         start = start + ONE_DAY;
         end = end + ONE_DAY;
       }

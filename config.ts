@@ -8,7 +8,7 @@ export const MOVIES_URI = `${API_URI}/${API_VERSION}/movies`;
 export const DETAIL_URI = `${API_URI}/${API_VERSION}/detail`;
 export const CHANNEL_LOGO_SRC = `${ASSET_URI}/${ASSET_VERSION}/img/channels/${ASSET_DIMENSIONS}/%s.png`;
 export const DEEP_LINK = 'https://www.tvgids.nl/film';
-export const NEXT_STARTS_AT = 6; // 06:00 at night the next day
+export const DAY_STARTS_AT = 6; // 06:00 at night the next day
 export const CHANNELS: { [key: number]: string } = {
   1: 'NPO 1',
   2: 'NPO 2',
