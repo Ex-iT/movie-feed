@@ -15,6 +15,7 @@ import formatTime from '../../../lib/formatTime';
 import getEpoch from '../../../lib/getEpoch';
 import getProgress from '../../../lib/getProgress';
 import { Prog, Days, Error, EnrichedProg } from '../../../types/sharedTypes';
+import formatHours from '../../../lib/formatHours';
 
 export default async function handler(
   req: NextApiRequest,
@@ -62,11 +63,11 @@ const enrichData = (channelData: Array<Prog>) => {
 
       // Adjust start/end time to make the next
       // day start at `NEXT_STARTS_AT` at night
-      if (getHours(start) <= NEXT_STARTS_AT) {
+      if (parseInt(formatHours(start), 10) <= NEXT_STARTS_AT) {
         start = start + ONE_DAY;
         end = end + ONE_DAY;
       }
-      if (getHours(end) <= 0) {
+      if (parseInt(formatHours(end), 10) <= 0) {
         end = end + ONE_DAY;
       }
 
@@ -99,5 +100,3 @@ const getDeepLinkUrl = (title: string) =>
     decamelize: false,
     customReplacements: [['&', '']],
   })}`;
-
-const getHours = (timestamp: number) => new Date(timestamp * 1000).getHours();
