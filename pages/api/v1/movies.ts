@@ -61,14 +61,17 @@ const enrichData = (channelData: Array<Prog>) => {
       let start = parseInt(ps, 10);
       let end = parseInt(pe, 10);
 
-      // Adjust start/end time to make the next
-      // day start at `NEXT_STARTS_AT` at night
-      if (parseInt(formatHours(start), 10) <= DAY_STARTS_AT) {
-        start = start + ONE_DAY;
+      console.log({t: movie.title, start, end});
+
+      // Fix for end time before start time
+      if (end < start) {
         end = end + ONE_DAY;
-      }
-      if (parseInt(formatHours(end), 10) <= 0) {
-        end = end + ONE_DAY;
+
+        // Adjust start time to make the next
+        // day start at `NEXT_STARTS_AT` at night
+        if (parseInt(formatHours(start), 10) <= DAY_STARTS_AT) {
+            start = start + ONE_DAY;
+        }
       }
 
       return {
@@ -83,7 +86,7 @@ const enrichData = (channelData: Array<Prog>) => {
         day: formatDate(start),
         // Overwriting the `ps` and `pe` here to
         // return the 'fixed' start and end time
-        ps: `${start}`,
+        // ps: `${start}`,
         pe: `${end}`,
       };
     })
