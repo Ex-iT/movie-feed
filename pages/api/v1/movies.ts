@@ -61,8 +61,6 @@ const enrichData = (channelData: Array<Prog>) => {
       let start = parseInt(ps, 10);
       let end = parseInt(pe, 10);
 
-      console.log({t: movie.title, start, end});
-
       // Fix for end time before start time
       if (end < start) {
         end = end + ONE_DAY;
