@@ -89,7 +89,7 @@ const enrichData = (channelData: Array<Prog>) => {
         pe: String(end),
       };
     })
-    .sort((a, z) => parseInt(z.start, 10) - parseInt(a.start, 10))
+    .sort((a, z) => parseInt(a.ps, 10) - parseInt(z.ps, 10)) // Sort with original timestamp
     .sort((a, z) => parseInt(a.ch_id, 10) - parseInt(z.ch_id, 10));
 };
 
