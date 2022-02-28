@@ -64,12 +64,13 @@ const enrichData = (channelData: Array<Prog>) => {
       // Fix for end time before start time
       if (end < start) {
         end = end + ONE_DAY;
+      }
 
-        // Adjust start time to make the next
-        // day start at `NEXT_STARTS_AT` at night
-        if (parseInt(formatHours(start), 10) <= DAY_STARTS_AT) {
-            start = start + ONE_DAY;
-        }
+      // Adjust start time to make the next
+      // day start at `NEXT_STARTS_AT` at night
+      if (parseInt(formatHours(start), 10) <= DAY_STARTS_AT) {
+        start = start + ONE_DAY;
+        end = end + ONE_DAY;
       }
 
       return {
@@ -83,11 +84,12 @@ const enrichData = (channelData: Array<Prog>) => {
         deep_link: getDeepLinkUrl(movie.title),
         day: formatDate(start),
         // Overwriting the `ps` and `pe` here to
-        // return the 'fixed' start and end time
-        // ps: `${start}`,
-        pe: `${end}`,
+        // return the updated start and end time
+        ps: String(start),
+        pe: String(end),
       };
     })
+    .sort((a, z) => parseInt(z.start, 10) - parseInt(a.start, 10))
     .sort((a, z) => parseInt(a.ch_id, 10) - parseInt(z.ch_id, 10));
 };
 
