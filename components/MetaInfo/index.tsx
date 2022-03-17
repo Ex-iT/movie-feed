@@ -20,7 +20,7 @@ const MetaInfo = ({ programDetails, movieDetails }: MetaInfoProps) => {
         <p>
           <strong>Waardering:</strong> {tvg_rating}
         </p>
-      ) : (
+      ) : tvg_rating !== null && (
         <p className="loading"></p>
       )}
       {generic.year ? (
