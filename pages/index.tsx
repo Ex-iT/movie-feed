@@ -2,9 +2,9 @@ import { GetServerSideProps } from 'next';
 import React, { useEffect, useState } from 'react';
 import { CACHING_DEFAULT } from '../config';
 import DefaultLayout from '../Layout/DefaultLayout';
+import fetchData from '../lib/fetchData';
 import HomePage from '../pageComponents/HomePage';
-import { Days, EnrichedProg } from '../types/sharedTypes';
-import { getMovies } from './api/v1/movies';
+import { EnrichedProg } from '../types/sharedTypes';
 
 interface HomeProps {
   programsToday: Array<EnrichedProg>;
@@ -12,12 +12,31 @@ interface HomeProps {
 }
 
 const Home = ({ programsToday, programsTomorrow }: HomeProps) => {
+  const [today, setToday] = useState(programsToday);
+  const [tomorrow, setTomorrow] = useState(programsTomorrow);
+
+  useEffect(() => {
+    const getToday = async () => {
+      const json = await fetchData(`api/v1/movies?day=today`);
+      if (json.length) {
+        setToday(json);
+      }
+    };
+
+    const getTomorrow = async () => {
+      const json = await fetchData(`api/v1/movies?day=tomorrow`);
+      if (json.length) {
+        setTomorrow(json);
+      }
+    };
+
+    getToday().catch(() => setToday([]));
+    getTomorrow().catch(() => setTomorrow([]));
+  }, []);
+
   return (
     <DefaultLayout>
-      <HomePage
-        programsToday={programsToday}
-        programsTomorrow={programsTomorrow}
-      />
+      <HomePage programsToday={today} programsTomorrow={tomorrow} />
     </DefaultLayout>
   );
 };
@@ -27,8 +46,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
   return {
     props: {
-      programsToday: await getMovies(Days.today) || [],
-      programsTomorrow: await getMovies(Days.tomorrow) || []
+      programsToday: [],
+      programsTomorrow: [],
     },
   };
 };
