@@ -27,4 +27,4 @@ export const CHANNELS: { [key: number]: string } = {
 };
 export const EMPTY_IMG =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-export const CACHING_DEFAULT = 'public, max-age=3600';
+export const CACHING_DEFAULT = 'public, max-age=7200';
