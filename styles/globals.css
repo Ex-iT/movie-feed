@@ -26,7 +26,7 @@ main {
   overflow: hidden;
 }
 
-@media screen and (min-width: 720px) {
+@media (min-width: 720px) {
   main {
     display: flex;
   }
@@ -85,7 +85,7 @@ ol {
   margin-bottom: 30px;
 }
 
-@media screen and (min-width: 720px) {
+@media (min-width: 720px) {
   .today {
     margin-right: 10px;
   }
@@ -165,7 +165,7 @@ ol {
   transition: height 0.3s ease-out, margin 0.3s ease-out;
 }
 
-@media screen and (min-width: 720px) {
+@media (min-width: 720px) {
   .asset-details {
     display: flex;
     flex-direction: row-reverse;
@@ -187,7 +187,7 @@ ol {
   font-weight: bold;
 }
 
-@media screen and (min-width: 720px) {
+@media (min-width: 720px) {
   .synopsis {
     flex: 1 1 66%;
   }
@@ -199,6 +199,14 @@ ol {
 
 .asset-image {
   margin: 0 0 10px 0;
+}
+
+@media (min-width: 720px) {
+  .asset-image {
+    flex: 1 1 33%;
+    margin: 0 0 0 20px;
+    text-align: right;
+  }
 }
 
 .asset-image span {
@@ -224,14 +232,6 @@ ol {
   }
   100% {
     opacity: 1;
-  }
-}
-
-@media screen and (min-width: 720px) {
-  .asset-image {
-    flex: 1 1 33%;
-    margin: 0 0 0 20px;
-    text-align: right;
   }
 }
 
