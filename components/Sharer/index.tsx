@@ -1,4 +1,5 @@
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
+
 import ucFirst from '../../lib/ucFirst';
 import { EnrichedProg } from '../../types/sharedTypes';
 

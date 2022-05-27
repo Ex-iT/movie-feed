@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { CACHING_DEFAULT, DETAIL_URI } from '../../../config';
 import fetchData from '../../../lib/fetchData';
-import { MovieDetails, Error } from '../../../types/sharedTypes';
+import { Error, MovieDetails } from '../../../types/sharedTypes';
 
 export default async function handler(
   req: NextApiRequest,

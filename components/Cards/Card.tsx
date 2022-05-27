@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import getEpoch from '../../lib/getEpoch';
 import getProgress from '../../lib/getProgress';
 import { EnrichedProg } from '../../types/sharedTypes';

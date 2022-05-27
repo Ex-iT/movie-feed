@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+import { EMPTY_IMG } from '../../config';
+import fetchData from '../../lib/fetchData';
 import { EnrichedProg, MovieDetails } from '../../types/sharedTypes';
 import MetaInfo from '../MetaInfo';
-import fetchData from '../../lib/fetchData';
-import { EMPTY_IMG } from '../../config';
 
 interface DetailsProps {
   programDetails: EnrichedProg;

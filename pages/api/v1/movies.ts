@@ -1,21 +1,22 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import slugify from '@sindresorhus/slugify';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import {
   CACHING_DEFAULT,
   CHANNELS,
   CHANNEL_LOGO_SRC,
+  DAY_STARTS_AT,
   DEEP_LINK,
   EMPTY_IMG,
   MOVIES_URI,
-  DAY_STARTS_AT,
 } from '../../../config';
 import fetchData from '../../../lib/fetchData';
 import formatDate from '../../../lib/formatDate';
+import formatHours from '../../../lib/formatHours';
 import formatTime from '../../../lib/formatTime';
 import getEpoch from '../../../lib/getEpoch';
 import getProgress from '../../../lib/getProgress';
-import { Prog, Days, Error, EnrichedProg } from '../../../types/sharedTypes';
-import formatHours from '../../../lib/formatHours';
+import { Days, EnrichedProg, Error, Prog } from '../../../types/sharedTypes';
 
 export default async function handler(
   req: NextApiRequest,
