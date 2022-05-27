@@ -1,29 +1,39 @@
+:root {
+  --background-color-main: #000;
+  --foreground-color-main: #fff;
+  --border-radius: 2px;
+  --spacing-small: 0.313rem;
+  --spacing-medium: 0.625rem;
+  --spacing-large: 1.25rem;
+  --spacing-extra-large: 1.875rem;
+}
+
 html,
 body {
-  -webkit-text-size-adjust: 100%;
-  font-size: 16px;
+  background-color: var(--background-color-main);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
   line-height: 1;
-  background-color: #000;
   margin: 0;
   padding: 0;
-  height: 100%;
+  text-size-adjust: none;
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 main {
-  position: relative;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground-color-main);
+  font-family: Arial, sans-serif;
   font-size: 1em;
   line-height: 1.375em;
-  padding: 1em;
   min-height: 100vh;
   overflow: hidden;
+  padding: 1em;
+  position: relative;
 }
 
 @media (min-width: 720px) {
@@ -32,31 +42,27 @@ main {
   }
 }
 
-[hidden] {
-  display: none !important;
-}
-
 .background-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
+  background-attachment: fixed;
   background-image: url('/assets/bg.jpg');
   background-size: cover;
-  background-attachment: fixed;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 h1 {
   font-size: 1.5em;
   font-weight: bold;
-  margin: 0 0 20px 0;
+  margin: 0 0 var(--spacing-large);
 }
 
 h2 {
   font-size: 1.2em;
   font-weight: bold;
-  margin: 0 0 5px 0;
+  margin: 0 0 var(--spacing-small);
 }
 
 p {
@@ -68,26 +74,26 @@ i {
 }
 
 ol {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style-type: none;
 }
 
 .a11y-only {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
 }
 
 .today {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-extra-large);
 }
 
 @media (min-width: 720px) {
   .today {
-    margin-right: 10px;
+    margin-right: var(--spacing-medium);
   }
 
   .today,
@@ -97,18 +103,18 @@ ol {
 }
 
 .card {
-  position: relative;
+  background-color: rgb(255 255 255 / 20%);
+  border-radius: var(--border-radius);
   display: flex;
-  margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px;
-  border-radius: 2px;
-  min-height: 71px;
+  margin-bottom: var(--spacing-medium);
+  min-height: 4.438rem;
+  padding: var(--spacing-medium);
+  position: relative;
   width: 100%;
 }
 
 .card.passed .details {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(255 255 255 / 70%);
   transition: color 0.3s ease-in;
 }
 
@@ -121,47 +127,47 @@ ol {
 }
 
 .card .progress-bar {
-  position: absolute;
+  border-bottom: 2px solid rgb(225 75 75 / 30%);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
   bottom: 0;
   left: 0;
+  position: absolute;
   right: 0;
-  border-bottom: 2px solid rgba(225, 75, 75, 0.3);
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
 }
 
 .card .progress-bar > div {
-  content: '';
-  position: absolute;
+  border-bottom: 2px solid rgb(225 75 75 / 80%);
+  border-bottom-left-radius: var(--border-radius);
   bottom: -2px;
+  content: '';
   left: 0;
+  position: absolute;
   right: 0;
-  width: 0;
-  border-bottom: 2px solid rgba(225, 75, 75, 0.8);
-  border-bottom-left-radius: 2px;
   transition: width 0.3s ease-out;
+  width: 0;
 }
 
 .info {
+  padding-right: var(--spacing-extra-large);
   position: relative;
   width: 100%;
-  padding-right: 30px;
 }
 
 .logo {
-  margin-right: 10px;
+  margin-right: var(--spacing-medium);
 }
 
 .asset-details {
-  overflow: hidden;
   height: 0;
   margin-top: 0;
+  overflow: hidden;
   transition: height 0.3s ease-out, margin 0.3s ease-out;
 }
 
 .asset-details.open {
   height: 100%;
-  margin-top: 10px;
+  margin-top: var(--spacing-medium);
   transition: height 0.3s ease-out, margin 0.3s ease-out;
 }
 
@@ -174,13 +180,13 @@ ol {
 
 .synopsis .prefix-description {
   float: left;
-  margin-right: 5px;
+  margin-right: var(--spacing-small);
 }
 
 .synopsis p {
+  margin-bottom: var(--spacing-small);
+  min-height: 1.375rem;
   position: relative;
-  min-height: 22px;
-  margin-bottom: 5px;
 }
 
 .synopsis strong {
@@ -194,58 +200,59 @@ ol {
 }
 
 .synopsis .meta-info {
-  margin-top: 5px;
+  margin-top: var(--spacing-small);
 }
 
 .asset-image {
-  margin: 0 0 10px 0;
+  margin: 0 0 var(--spacing-medium);
 }
 
 @media (min-width: 720px) {
   .asset-image {
     flex: 1 1 33%;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 var(--spacing-large);
     text-align: right;
   }
 }
 
 .asset-image span {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(255 255 255 / 20%);
   display: inline-block;
-  vertical-align: middle;
   max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
 }
 
 .asset-image span::before {
   animation: 1.5s linear 0.5s infinite alternate none running pulse;
+  background-color: rgb(255 255 255 / 20%);
   content: '';
-  position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
 }
 
 @keyframes pulse {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
 
 .button-share {
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
   background: transparent;
+  border: none;
+  cursor: pointer;
   fill: #fff;
-  padding: 0;
-  width: 25px;
   height: auto;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25px;
 }
 
 .guidance {
@@ -253,9 +260,9 @@ ol {
 }
 
 .guidance ul {
+  display: flex;
   list-style-type: none;
   padding: 0;
-  display: flex;
 }
 
 .guidance li {
@@ -272,19 +279,20 @@ ol {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.08),
+    rgb(255 255 255 / 8%),
     transparent
   );
   content: '';
+  inset: 0;
   position: absolute;
   transform: translateX(-100%);
-  inset: 0;
 }
 
 @keyframes swipe {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
