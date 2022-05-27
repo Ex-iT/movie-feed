@@ -1,5 +1,5 @@
-import React from 'react';
 import { EnrichedProg } from '../../types/sharedTypes';
+
 import Card from './Card';
 
 interface CardsProps {

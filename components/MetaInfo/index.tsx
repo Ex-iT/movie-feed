@@ -1,5 +1,5 @@
-import React from 'react';
 import Image from 'next/image';
+
 import { EnrichedProg, MovieDetails } from '../../types/sharedTypes';
 
 interface MetaInfoProps {

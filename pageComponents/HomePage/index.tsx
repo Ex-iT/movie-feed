@@ -1,4 +1,3 @@
-import React from 'react';
 import Cards from '../../components/Cards';
 import { EnrichedProg } from '../../types/sharedTypes';
 

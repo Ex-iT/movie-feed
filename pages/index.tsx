@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
-import React, { useEffect, useState } from 'react';
-import { CACHING_DEFAULT } from '../config';
+import { useEffect, useState } from 'react';
+
 import DefaultLayout from '../Layout/DefaultLayout';
+import { CACHING_DEFAULT } from '../config';
 import fetchData from '../lib/fetchData';
 import HomePage from '../pageComponents/HomePage';
 import { EnrichedProg } from '../types/sharedTypes';
