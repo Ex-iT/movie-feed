@@ -23,7 +23,7 @@ export const CHANNELS: { [key: number]: string } = {
   92: 'RTL 8',
   440: 'FOX',
   460: 'RTL 9',
-  467: 'Spike',
+  496: 'Paramount Network',
 };
 export const EMPTY_IMG =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
