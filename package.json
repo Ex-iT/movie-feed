@@ -10,10 +10,13 @@
     "stylelint": "stylelint 'styles/*.css'"
   },
   "dependencies": {
-    "next": "^12.1.0",
-    "preact": "^10.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "next": "^12.2.1",
+    "next-plugin-preact": "^3.0.7",
+    "preact": "^10.9.0",
+    "preact-render-to-string": "^5.2.0",
+    "react": "npm:@preact/compat",
+    "react-dom": "npm:@preact/compat",
+    "react-ssr-prepass": "npm:preact-ssr-prepass"
   },
   "devDependencies": {
     "@sindresorhus/slugify": "^2.1.0",
